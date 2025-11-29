@@ -1,0 +1,7 @@
+# Output direcotories
+node_modules/
+target/
+db/
+
+# Log files
+derby.log
