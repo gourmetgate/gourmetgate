@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="org.eclipse.scout.rt.platform.logger.LevelRangeFilter">
+      <levelMin>TRACE</levelMin>
+      <levelMax>INFO</levelMax>
+    </filter>
+    <encoder class="org.eclipse.scout.rt.platform.logger.FixedPatternLogbackEncoder" />
+  </appender>
+
+  <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="org.eclipse.scout.rt.platform.logger.LevelRangeFilter">
+      <levelMin>WARN</levelMin>
+      <levelMax>ERROR</levelMax>
+    </filter>
+    <target>System.err</target>
+    <encoder class="org.eclipse.scout.rt.platform.logger.FixedPatternLogbackEncoder" />
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="STDERR" />
+  </root>
+
+  <logger name="org.quartz" level="WARN" />
+</configuration>

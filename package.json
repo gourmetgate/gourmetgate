@@ -1,0 +1,12 @@
+{
+  "name": "@gourmetgate/root",
+  "version": "1.0.0-SNAPSHOT",
+  "private": true,
+  "scripts": {
+    "pnpm-install": "pnpm install --ignore-scripts"
+  },
+  "dependencies": {
+    "eslint": "8.57.1",
+    "@eclipse-scout/eslint-config": "25.2.14"
+  }
+}

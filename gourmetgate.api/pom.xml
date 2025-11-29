@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>app.gourmetgate</groupId>
+    <artifactId>gourmetgate</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../gourmetgate</relativePath>
+  </parent>
+
+  <artifactId>gourmetgate.api</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>app.gourmetgate</groupId>
+      <artifactId>gourmetgate.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.server.commons</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.scout.rt</groupId>
+      <artifactId>org.eclipse.scout.rt.api</artifactId>
+    </dependency>
+  </dependencies>
+</project>

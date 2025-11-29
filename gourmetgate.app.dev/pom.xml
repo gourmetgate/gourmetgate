@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>app.gourmetgate</groupId>
+    <artifactId>gourmetgate</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../gourmetgate</relativePath>
+  </parent>
+
+  <!-- Application leaf module with dependencies only relevant for development including config.properties/logback.xml -->
+  <artifactId>gourmetgate.app.dev</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>app.gourmetgate</groupId>
+      <artifactId>gourmetgate.app</artifactId>
+    </dependency>
+  </dependencies>
+</project>
