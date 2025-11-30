@@ -1,7 +1,7 @@
 # Output direcotories
 node_modules/
 target/
-db/
+gourmetgate.app.dev/db
 
 # Log files
 derby.log
