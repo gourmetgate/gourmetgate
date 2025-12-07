@@ -10,7 +10,6 @@ import org.eclipse.scout.rt.platform.exception.PlatformException;
 import org.jooq.DSLContext;
 import org.jooq.codegen.GenerationTool;
 import org.jooq.codegen.JavaGenerator;
-import org.jooq.meta.derby.DerbyDatabase;
 import org.jooq.meta.jaxb.Configuration;
 import org.jooq.meta.jaxb.Database;
 import org.jooq.meta.jaxb.ForcedType;
@@ -20,10 +19,10 @@ import org.jooq.meta.jaxb.Target;
 import app.gourmetgate.gourmetgate.db.Environment;
 import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaProperty;
 import app.gourmetgate.gourmetgate.persistence.common.DateConverter;
+import org.jooq.meta.postgres.PostgresDatabase;
 
 public class GeneratorApplication {
 
-  public static final String OUTPUT_DIRECTORY = "../gourmetgate.persistence/src/generated/java";
   public static final String OUTPUT_PACKAGE = "app.gourmetgate.gourmetgate.persistence";
 
   public static void main(String[] args) {
@@ -39,10 +38,10 @@ public class GeneratorApplication {
                 new ForcedType().withUserType(Date.class.getName())
                     .withConverter(DateConverter.class.getName()).withIncludeTypes("timestamp"),
                 new ForcedType().withName(BigDecimal.class.getName()).withIncludeTypes("bigint"))
-            .withName(DerbyDatabase.class.getName()).withIncludes(".*")
+            .withName(PostgresDatabase.class.getName()).withIncludes(".*")
             .withInputSchema(CONFIG.getPropertyValue(SchemaProperty.class)).withOutputSchema("Schema")
             .withExcludes("SYS*.*"))
-        .withTarget(new Target().withDirectory(OUTPUT_DIRECTORY).withPackageName(OUTPUT_PACKAGE)));
+        .withTarget(new Target().withPackageName(OUTPUT_PACKAGE)));
 
     GenerationTool tool = new GenerationTool();
     try {

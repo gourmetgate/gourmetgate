@@ -143,7 +143,7 @@ public final class PersistenceProperties {
 
     @Override
     public String getDefaultValue() {
-      return "org.apache.derby.jdbc.EmbeddedDriver";
+      return "org.postgresql.Driver";
     }
 
     @Override

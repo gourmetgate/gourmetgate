@@ -36,7 +36,7 @@ public class Schema extends SchemaImpl {
    * No further instances allowed
    */
   private Schema() {
-    super(DSL.name("Schema"), null, DSL.comment(""));
+    super(DSL.name("public"), null, DSL.comment(""));
   }
 
 
