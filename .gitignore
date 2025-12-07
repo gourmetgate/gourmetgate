@@ -5,3 +5,4 @@ gourmetgate.app.dev/db
 
 # Log files
 derby.log
+.env

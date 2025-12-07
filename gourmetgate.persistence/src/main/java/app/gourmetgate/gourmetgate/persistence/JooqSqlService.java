@@ -1,6 +1,8 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 import org.eclipse.scout.rt.platform.BEANS;
@@ -8,7 +10,7 @@ import org.eclipse.scout.rt.platform.CreateImmediately;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.transaction.AbstractTransactionMember;
 import org.eclipse.scout.rt.platform.transaction.ITransaction;
-import org.eclipse.scout.rt.server.jdbc.derby.AbstractDerbySqlService;
+import org.eclipse.scout.rt.server.jdbc.postgresql.AbstractPostgreSqlService;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
@@ -25,7 +27,7 @@ import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaPrope
 import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.UsernameProperty;
 
 @CreateImmediately
-public class JooqSqlService extends AbstractDerbySqlService implements IJooqService {
+public class JooqSqlService extends AbstractPostgreSqlService implements IJooqService {
 
   private final Configuration m_configuration;
   private final ConnectionProvider m_connectionProvider;
