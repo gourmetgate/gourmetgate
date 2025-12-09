@@ -1,10 +1,6 @@
 package app.gourmetgate.gourmetgate.persistence;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.SQLException;
-import java.util.regex.Pattern;
-
+import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.*;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.CreateImmediately;
 import org.eclipse.scout.rt.platform.config.CONFIG;
@@ -20,11 +16,8 @@ import org.jooq.conf.Settings;
 import org.jooq.impl.DSL;
 import org.jooq.impl.DefaultConfiguration;
 
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.DialectProperty;
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.JdbcMappingNameProperty;
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.PasswordProperty;
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaProperty;
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.UsernameProperty;
+import java.sql.Connection;
+import java.util.regex.Pattern;
 
 @CreateImmediately
 public class JooqSqlService extends AbstractPostgreSqlService implements IJooqService {

@@ -5,6 +5,8 @@ import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
+import java.util.UUID;
+
 @TypeName("gourmetgate.Person")
 public class PersonDo extends DoEntity {
 
@@ -16,7 +18,7 @@ public class PersonDo extends DoEntity {
     return doValue("lastName");
   }
 
-  public DoValue<String> id() {
+  public DoValue<UUID> id() {
     return doValue("id");
   }
 
@@ -55,13 +57,13 @@ public class PersonDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public PersonDo withId(String id) {
+  public PersonDo withId(UUID id) {
     id().set(id);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public String getId() {
+  public UUID getId() {
     return id().get();
   }
 

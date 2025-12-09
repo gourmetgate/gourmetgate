@@ -4,11 +4,12 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
+import org.jooq.Constants;
+import org.jooq.Schema;
+import org.jooq.impl.CatalogImpl;
+
 import java.util.Arrays;
 import java.util.List;
-
-import org.jooq.Constants;
-import org.jooq.impl.CatalogImpl;
 
 
 /**
@@ -25,9 +26,9 @@ public class DefaultCatalog extends CatalogImpl {
   public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
   /**
-   * The schema <code>Schema</code>.
+   * standard public schema
    */
-  public final Schema SCHEMA = Schema.SCHEMA;
+  public final Public PUBLIC = Public.PUBLIC;
 
   /**
    * No further instances allowed
@@ -37,9 +38,9 @@ public class DefaultCatalog extends CatalogImpl {
   }
 
   @Override
-  public final List<org.jooq.Schema> getSchemas() {
+  public final List<Schema> getSchemas() {
     return Arrays.asList(
-      Schema.SCHEMA
+      Public.PUBLIC
     );
   }
 

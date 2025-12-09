@@ -1,11 +1,6 @@
-package app.gourmetgate.gourmetgate.db;
+package app.gourmetgate.gourmetgate.db.common;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.function.Consumer;
-import java.util.regex.Pattern;
-
+import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaProperty;
 import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.jooq.Configuration;
@@ -19,7 +14,11 @@ import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaProperty;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.function.Consumer;
+import java.util.regex.Pattern;
 
 public class JooqEnvironmentService implements IService {
 

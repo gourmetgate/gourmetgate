@@ -1,20 +1,21 @@
 package app.gourmetgate.gourmetgate.data.person;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.eclipse.scout.rt.platform.ApplicationScoped;
+
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 @ApplicationScoped
 public interface IPersonRepository {
 
-  void store(String id, PersonDo person);
+  void store(UUID id, PersonDo person);
 
   Stream<PersonDo> list(PersonRestrictionDo restrictions, int numberOfRows);
 
-  Optional<PersonDo> getById(String id);
+  Optional<PersonDo> getById(UUID id);
 
-  int remove(String id);
+  int remove(UUID id);
 
   PersonDo create(PersonDo person);
 }

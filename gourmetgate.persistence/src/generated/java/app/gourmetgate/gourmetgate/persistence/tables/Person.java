@@ -4,27 +4,16 @@
 package app.gourmetgate.gourmetgate.persistence.tables;
 
 
-import java.util.Collection;
-
 import app.gourmetgate.gourmetgate.persistence.Keys;
-import app.gourmetgate.gourmetgate.persistence.Schema;
+import app.gourmetgate.gourmetgate.persistence.Public;
 import app.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
-
-import org.jooq.Condition;
-import org.jooq.Field;
-import org.jooq.Name;
-import org.jooq.PlainSQL;
-import org.jooq.QueryPart;
-import org.jooq.SQL;
-import org.jooq.Select;
-import org.jooq.Stringly;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
+
+import java.util.Collection;
+import java.util.UUID;
 
 
 /**
@@ -36,7 +25,7 @@ public class Person extends TableImpl<PersonRecord> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * The reference instance of <code>Schema.person</code>
+   * The reference instance of <code>public.person</code>
    */
   public static final Person PERSON = new Person();
 
@@ -49,29 +38,29 @@ public class Person extends TableImpl<PersonRecord> {
   }
 
   /**
-   * The column <code>Schema.person.person_id</code>.
+   * The column <code>public.person.person_id</code>.
    */
-  public final TableField<PersonRecord, String> PERSON_ID = createField(DSL.name("person_id"), SQLDataType.VARCHAR(36).nullable(false), this, "");
+  public final TableField<PersonRecord, UUID> PERSON_ID = createField(DSL.name("person_id"), SQLDataType.UUID.nullable(false), this, "");
 
   /**
-   * The column <code>Schema.person.first_name</code>.
-   */
-  public final TableField<PersonRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(200), this, "");
-
-  /**
-   * The column <code>Schema.person.last_name</code>.
-   */
-  public final TableField<PersonRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(200).nullable(false), this, "");
-
-  /**
-   * The column <code>Schema.person.salary</code>.
-   */
-  public final TableField<PersonRecord, Integer> SALARY = createField(DSL.name("salary"), SQLDataType.INTEGER, this, "");
-
-  /**
-   * The column <code>Schema.person.external</code>.
+   * The column <code>public.person.external</code>.
    */
   public final TableField<PersonRecord, Boolean> EXTERNAL = createField(DSL.name("external"), SQLDataType.BOOLEAN, this, "");
+
+  /**
+   * The column <code>public.person.first_name</code>.
+   */
+  public final TableField<PersonRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(255), this, "");
+
+  /**
+   * The column <code>public.person.last_name</code>.
+   */
+  public final TableField<PersonRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(255), this, "");
+
+  /**
+   * The column <code>public.person.salary</code>.
+   */
+  public final TableField<PersonRecord, Integer> SALARY = createField(DSL.name("salary"), SQLDataType.INTEGER, this, "");
 
   private Person(Name alias, Table<PersonRecord> aliased) {
     this(alias, aliased, (Field<?>[]) null, null);
@@ -82,34 +71,34 @@ public class Person extends TableImpl<PersonRecord> {
   }
 
   /**
-   * Create an aliased <code>Schema.person</code> table reference
+   * Create an aliased <code>public.person</code> table reference
    */
   public Person(String alias) {
     this(DSL.name(alias), PERSON);
   }
 
   /**
-   * Create an aliased <code>Schema.person</code> table reference
+   * Create an aliased <code>public.person</code> table reference
    */
   public Person(Name alias) {
     this(alias, PERSON);
   }
 
   /**
-   * Create a <code>Schema.person</code> table reference
+   * Create a <code>public.person</code> table reference
    */
   public Person() {
     this(DSL.name("person"), null);
   }
 
   @Override
-  public org.jooq.Schema getSchema() {
-    return aliased() ? null : Schema.SCHEMA;
+  public Schema getSchema() {
+    return aliased() ? null : Public.PUBLIC;
   }
 
   @Override
   public UniqueKey<PersonRecord> getPrimaryKey() {
-    return Keys.PERSON_PK;
+    return Keys.PERSON_PKEY;
   }
 
   @Override
