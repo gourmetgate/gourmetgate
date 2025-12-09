@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Generate jooq classes based on DB" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="app.gourmetgate.gourmetgate.db.generator.GeneratorApplication" />
+  <configuration default="false" name="[database] generate jooq code" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="app.gourmetgate.gourmetgate.db.GeneratorApplication"/>
     <module name="gourmetgate.db" />
     <option name="VM_PARAMETERS" value="-Dscout.jandex.rebuild=true -Dconfig.properties=&quot;$MODULE_DIR$/../gourmetgate.app.dev/src/main/resources/dev.db.config.properties&quot;" />
     <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -12,7 +12,7 @@
       <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
       <ENTRIES>
         <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
+        <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH="gourmetgate/.env"/>
       </ENTRIES>
     </extension>
     <method v="2">

@@ -5,16 +5,22 @@ package app.gourmetgate.gourmetgate.persistence;
 
 
 import app.gourmetgate.gourmetgate.persistence.tables.Person;
+import app.gourmetgate.gourmetgate.persistence.tables.Vat;
 
 
 /**
- * Convenience access to all tables in Schema.
+ * Convenience access to all tables in public.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
   /**
-   * The table <code>Schema.person</code>.
+   * The table <code>public.person</code>.
    */
   public static final Person PERSON = Person.PERSON;
+
+  /**
+   * The table <code>public.vat</code>.
+   */
+  public static final Vat VAT = Vat.VAT;
 }

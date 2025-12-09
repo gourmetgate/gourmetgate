@@ -1,17 +1,5 @@
 package app.gourmetgate.gourmetgate.persistence.person;
 
-import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
-import static org.jooq.impl.DSL.noCondition;
-
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Stream;
-
-import org.eclipse.scout.rt.platform.util.StringUtility;
-import org.eclipse.scout.rt.platform.BEANS;
-import org.jooq.Condition;
-import org.jooq.Field;
-
 import app.gourmetgate.gourmetgate.data.person.IPersonRepository;
 import app.gourmetgate.gourmetgate.data.person.PersonDo;
 import app.gourmetgate.gourmetgate.data.person.PersonRestrictionDo;
@@ -19,6 +7,17 @@ import app.gourmetgate.gourmetgate.persistence.common.AbstractRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import app.gourmetgate.gourmetgate.persistence.tables.Person;
 import app.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
+import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.util.StringUtility;
+import org.jooq.Condition;
+import org.jooq.Field;
+
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
+
+import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.noCondition;
 
 public class PersonRepository extends AbstractRepository<Person, PersonRecord, PersonDo> implements IPersonRepository {
 
@@ -28,12 +27,12 @@ public class PersonRepository extends AbstractRepository<Person, PersonRecord, P
   }
 
   @Override
-  public Field<String> getIdColumn() {
+  public Field<UUID> getIdColumn() {
     return Person.PERSON.PERSON_ID;
   }
 
   @Override
-  public void store(String id, PersonDo person) {
+  public void store(UUID id, PersonDo person) {
     super.store(id, doToRec(person));
   }
 
@@ -57,14 +56,14 @@ public class PersonRepository extends AbstractRepository<Person, PersonRecord, P
   }
 
   @Override
-  public Optional<PersonDo> getById(String personId) {
+  public Optional<PersonDo> getById(UUID personId) {
     return get(personId).map(this::recToDo);
   }
 
   @Override
   public PersonDo create(PersonDo person) {
     PersonRecord newPersonRecord = newRecord();
-    String newPersonId = UUID.randomUUID().toString();
+    UUID newPersonId = UUID.randomUUID();
 
     fromDoToRecord(person, newPersonRecord)
       .setPersonId(newPersonId);
