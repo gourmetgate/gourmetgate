@@ -1,0 +1,21 @@
+name: Setup Enviroment
+description: Java 24 + Node + pnpm setup
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '24'
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: m2-${{ hashFiles('**/pom.xml') }}
+    - name: install pnpm
+      run: npm install pnpm --global
+      shell: bash
+

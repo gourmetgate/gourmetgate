@@ -1,0 +1,16 @@
+name: Run Unit Tests
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  Run-Unit-Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: ./.github/actions/setup
+      - name: Run Unit Test
+        run: mvn test

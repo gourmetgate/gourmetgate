@@ -5,7 +5,7 @@
   <parent>
     <groupId>app.gourmetgate</groupId>
     <artifactId>gourmetgate-root</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${gourmetgate.version}</version>
   </parent>
 
   <artifactId>gourmetgate</artifactId>
@@ -19,8 +19,8 @@
 
     <!-- docker image build settings -->
     <!-- build target (push) -->
-    <docker.app.image.registry>localhost:5000</docker.app.image.registry> <!-- set a desired registry before using profile exec.docker.image (e.g. registry.hub.docker.com/yourusername) -->
-    <docker.app.image.tag>1.0.0-latest</docker.app.image.tag>
+    <docker.app.image.registry>ghcr.io/gourmetgate</docker.app.image.registry> <!-- set a desired registry before using profile exec.docker.image (e.g. registry.hub.docker.com/yourusername) -->
+    <docker.app.image.tag>${gourmetgate.version}</docker.app.image.tag>
     <!-- java source image (pull) -->
     <docker.java.image.name>eclipse-temurin</docker.java.image.name>
     <docker.java.image.tag>24-jdk-noble</docker.java.image.tag>
@@ -39,7 +39,6 @@
     <module>../gourmetgate.app</module>
     <module>../gourmetgate.app.dev</module>
     <module>../gourmetgate.app.image</module>
-    <module>../gourmetgate.app.zip</module>
 
     <!-- DB modules -->
     <module>../gourmetgate.db</module>
@@ -88,6 +87,14 @@
                   </goals>
                 </execution>
               </executions>
+              <configuration>
+                <to>
+                  <auth>
+                    <username>github.actor</username>
+                    <password>${REGISTRY_PASSWORD}</password>
+                  </auth>
+                </to>
+              </configuration>
             </plugin>
           </plugins>
         </pluginManagement>
