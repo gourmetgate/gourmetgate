@@ -1,0 +1,45 @@
+name: Deploy on Test sytem
+on:
+  push:
+    branches: [develop]
+permissions:
+  contents: write
+jobs:
+  Update-Version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Bump Version
+        run: |
+          export CURRENT_VERSION=$(grep -oP '(?<=<gourmetgate.version>)[^<]+' pom.xml)
+          echo "Current revision in pom.xml: $CURRENT_VERSION"
+          if [[ "$CURRENT_VERSION" == *-* ]]; then
+            BASE="${CURRENT_VERSION%-*}"
+            SUFFIX="${CURRENT_VERSION##*-}"
+            NEW_VERSION="$BASE-$((SUFFIX + 1))"
+          else
+            NEW_VERSION="$CURRENT_VERSION-1"
+          fi
+          echo New version: $NEW_VERSION
+          sed -i "s/<gourmetgate.version>$CURRENT_VERSION<\/gourmetgate.version>/<gourmetgate.version>$NEW_VERSION<\/gourmetgate.version>/" pom.xml
+          sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" package.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.ui/package.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.app/package.json
+
+      - name: Commit Changes
+        run: |
+          git config --global user.email "ci@gourmetgate.ch"
+          git config --global user.name "CI Bot"
+          git config pull.rebase true
+          git checkout $CI_COMMIT_REF_NAME
+          git add .
+          git commit -m "Update version to $VERSION"
+          git push
+  Build-Docker-Image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Building Docker image
+        run: mvn clean install -Pexec.docker.image -Djib.allowInsecureRegistries=true

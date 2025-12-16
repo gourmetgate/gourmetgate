@@ -7,9 +7,12 @@
     <version>25.2.1</version>
     <relativePath/>
   </parent>
+  <properties>
+    <gourmetgate.version>1.0.0</gourmetgate.version>
+  </properties>
   <groupId>app.gourmetgate</groupId>
   <artifactId>gourmetgate-root</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${gourmetgate.version}</version>
   <packaging>pom</packaging>
   <modules>
     <module>gourmetgate</module>
