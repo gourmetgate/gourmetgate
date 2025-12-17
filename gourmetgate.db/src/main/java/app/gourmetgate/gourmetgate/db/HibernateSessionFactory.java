@@ -1,7 +1,8 @@
 package app.gourmetgate.gourmetgate.db;
 
-import app.gourmetgate.gourmetgate.db.schema.ExampleEntity;
+import app.gourmetgate.gourmetgate.db.common.ISchemaEntity;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
+import org.eclipse.scout.rt.platform.BEANS;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -20,7 +21,8 @@ public class HibernateSessionFactory {
   }
 
   protected void registerEntityClasses(Configuration configuration) {
-    configuration.addAnnotatedClass(ExampleEntity.class);
+    BEANS.all(ISchemaEntity.class)
+      .forEach(entity -> configuration.addAnnotatedClass(entity.getClass()));
   }
 
   public SessionFactory buildSessionFactory() {
