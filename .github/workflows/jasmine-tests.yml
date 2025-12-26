@@ -1,0 +1,36 @@
+name: Run jasmine tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+permissions:
+  checks: write
+
+jobs:
+  run-jasmin-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: ./.github/actions/setup
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run Jasmine tests
+        working-directory: ./gourmetgate.ui
+        run: pnpm run test:ci
+      - name: Upload jasmine test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jasmine-test-reports
+          path: '**/test-results/*/*.xml'
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        with:
+          name: Jasmin test results
+          path: '**/test-results/*/*.xml'
+          reporter: java-junit
+          fail-on-error: true
+

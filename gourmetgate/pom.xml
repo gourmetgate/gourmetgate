@@ -90,8 +90,8 @@
               <configuration>
                 <to>
                   <auth>
-                    <username>github.actor</username>
-                    <password>${REGISTRY_PASSWORD}</password>
+                    <username>${env.GITHUB_ACTOR}</username>
+                    <password>${env.GITHUB_TOKEN}</password>
                   </auth>
                 </to>
               </configuration>
@@ -138,6 +138,12 @@
         <artifactId>postgresql</artifactId>
         <version>${org.postgresql.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker-qual</artifactId>
+        <version>3.49.5</version>
+      </dependency>
+
 
       <!-- Application dependencies -->
       <dependency>

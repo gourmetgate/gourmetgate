@@ -1,11 +1,13 @@
-name: Deploy on Test sytem
+name: Deploy on test system
 on:
   push:
     branches: [develop]
 permissions:
   contents: write
+  packages: write
+
 jobs:
-  Update-Version:
+  update-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,14 +29,14 @@ jobs:
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.ui/package.json
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.app/package.json
 
-      - name: Commit Changes
+      - name: Commit changes
         run: |
-          git config --global user.email "ci@gourmetgate.ch"
+          git config --global user.email "ci@gourmetgate.app"
           git config --global user.name "CI Bot"
           git config pull.rebase true
           git checkout $CI_COMMIT_REF_NAME
           git add .
-          git commit -m "Update version to $VERSION"
+          git commit -m "Update version to $NEW_VERSION"
           git push
   Build-Docker-Image:
     runs-on: ubuntu-latest
@@ -43,3 +45,6 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Building Docker image
         run: mvn clean install -Pexec.docker.image -Djib.allowInsecureRegistries=true
+    env:
+      GITHUB_ACTOR: ${{ github.actor }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
