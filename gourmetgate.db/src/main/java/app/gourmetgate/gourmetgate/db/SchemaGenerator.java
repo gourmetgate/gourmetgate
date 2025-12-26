@@ -5,6 +5,8 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.Collection;
+
 public class SchemaGenerator {
 
   public static void main(String[] args) {
@@ -15,9 +17,11 @@ public class SchemaGenerator {
     session.close();
   }
 
+  @SuppressWarnings("unchecked")
   protected static void persistInitialData(Session session) {
     BEANS.all(AbstractInitialDataProvider.class).stream()
       .map(AbstractInitialDataProvider::getInitialData)
+      .flatMap(Collection::stream)
       .forEach(session::persist);
   }
 }

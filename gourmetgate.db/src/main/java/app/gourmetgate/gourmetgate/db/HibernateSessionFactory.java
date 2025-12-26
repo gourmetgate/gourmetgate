@@ -1,8 +1,10 @@
 package app.gourmetgate.gourmetgate.db;
 
 import app.gourmetgate.gourmetgate.db.common.ISchemaEntity;
+import app.gourmetgate.gourmetgate.persistence.PersistenceProperties;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
+import org.eclipse.scout.rt.platform.config.CONFIG;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -29,16 +31,18 @@ public class HibernateSessionFactory {
     Configuration configuration = new Configuration();
 
     // Database connection settings
-    configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-    configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/demo_db");
-    configuration.setProperty("hibernate.connection.username", "root");
-    configuration.setProperty("hibernate.connection.password", "password");
+    configuration.setProperty("hibernate.connection.driver_class", CONFIG.getPropertyValue(PersistenceProperties.DriverProperty.class));
+    configuration.setProperty("hibernate.connection.url", CONFIG.getPropertyValue(PersistenceProperties.JdbcMappingNameProperty.class));
+    configuration.setProperty("hibernate.connection.username", CONFIG.getPropertyValue(PersistenceProperties.UsernameProperty.class));
+    configuration.setProperty("hibernate.connection.password", CONFIG.getPropertyValue(PersistenceProperties.PasswordProperty.class));
+    configuration.setProperty("hibernate.default_schema", CONFIG.getPropertyValue(PersistenceProperties.SchemaProperty.class));
 
     // Hibernate settings
     configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
     configuration.setProperty("hibernate.hbm2ddl.auto", "update");
     configuration.setProperty("hibernate.show_sql", "true");
     configuration.setProperty("hibernate.format_sql", "true");
+    configuration.setProperty("hibernate.physical_naming_strategy", "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy");
 
     registerEntityClasses(configuration);
 
