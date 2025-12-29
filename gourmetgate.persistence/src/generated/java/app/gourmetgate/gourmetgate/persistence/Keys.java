@@ -5,7 +5,9 @@ package app.gourmetgate.gourmetgate.persistence;
 
 
 import app.gourmetgate.gourmetgate.persistence.tables.Person;
+import app.gourmetgate.gourmetgate.persistence.tables.Vat;
 import app.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.VatRecord;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -23,5 +25,6 @@ public class Keys {
   // UNIQUE and PRIMARY KEY definitions
   // -------------------------------------------------------------------------
 
-  public static final UniqueKey<PersonRecord> PERSON_PK = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pk"), new TableField[] { Person.PERSON.PERSON_ID }, true);
+  public static final UniqueKey<PersonRecord> PERSON_PKEY = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pkey"), new TableField[]{Person.PERSON.PERSON_ID}, true);
+  public static final UniqueKey<VatRecord> VAT_PKEY = Internal.createUniqueKey(Vat.VAT, DSL.name("vat_pkey"), new TableField[]{Vat.VAT.VAT_ID}, true);
 }

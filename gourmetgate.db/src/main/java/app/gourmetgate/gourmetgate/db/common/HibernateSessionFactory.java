@@ -1,6 +1,5 @@
-package app.gourmetgate.gourmetgate.db;
+package app.gourmetgate.gourmetgate.db.common;
 
-import app.gourmetgate.gourmetgate.db.common.ISchemaEntity;
 import app.gourmetgate.gourmetgate.persistence.PersistenceProperties;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.BEANS;
@@ -16,8 +15,12 @@ public class HibernateSessionFactory {
   public static SessionFactory SESSION_FACTORY;
 
   public static SessionFactory getSessionFactory() {
+    return getSessionFactory(false);
+  }
+
+  public static SessionFactory getSessionFactory(boolean reset) {
     if (SESSION_FACTORY == null) {
-      SESSION_FACTORY = new HibernateSessionFactory().buildSessionFactory();
+      SESSION_FACTORY = new HibernateSessionFactory().buildSessionFactory(reset);
     }
     return SESSION_FACTORY;
   }
@@ -27,7 +30,7 @@ public class HibernateSessionFactory {
       .forEach(entity -> configuration.addAnnotatedClass(entity.getClass()));
   }
 
-  public SessionFactory buildSessionFactory() {
+  public SessionFactory buildSessionFactory(boolean reset) {
     Configuration configuration = new Configuration();
 
     // Database connection settings
@@ -39,7 +42,7 @@ public class HibernateSessionFactory {
 
     // Hibernate settings
     configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-    configuration.setProperty("hibernate.hbm2ddl.auto", "update");
+    configuration.setProperty("hibernate.hbm2ddl.auto", reset ? "create" : "update");
     configuration.setProperty("hibernate.show_sql", "true");
     configuration.setProperty("hibernate.format_sql", "true");
     configuration.setProperty("hibernate.physical_naming_strategy", "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy");

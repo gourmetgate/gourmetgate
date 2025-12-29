@@ -1,32 +1,28 @@
-package app.gourmetgate.gourmetgate.db.generator;
+package app.gourmetgate.gourmetgate.db;
+
+import app.gourmetgate.gourmetgate.db.common.JooqEnvironment;
+import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaProperty;
+import app.gourmetgate.gourmetgate.persistence.common.DateConverter;
+import org.eclipse.scout.rt.platform.config.CONFIG;
+import org.eclipse.scout.rt.platform.exception.PlatformException;
+import org.jooq.DSLContext;
+import org.jooq.codegen.GenerationTool;
+import org.jooq.codegen.JavaGenerator;
+import org.jooq.meta.jaxb.*;
+import org.jooq.meta.postgres.PostgresDatabase;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.UUID;
 
-import org.eclipse.scout.rt.platform.config.CONFIG;
-import org.eclipse.scout.rt.platform.exception.PlatformException;
-import org.jooq.DSLContext;
-import org.jooq.codegen.GenerationTool;
-import org.jooq.codegen.JavaGenerator;
-import org.jooq.meta.jaxb.Configuration;
-import org.jooq.meta.jaxb.Database;
-import org.jooq.meta.jaxb.ForcedType;
-import org.jooq.meta.jaxb.Generator;
-import org.jooq.meta.jaxb.Target;
-
-import app.gourmetgate.gourmetgate.db.Environment;
-import app.gourmetgate.gourmetgate.persistence.PersistenceProperties.SchemaProperty;
-import app.gourmetgate.gourmetgate.persistence.common.DateConverter;
-import org.jooq.meta.postgres.PostgresDatabase;
-
 public class GeneratorApplication {
 
+  public static final String OUTPUT_DIRECTORY = "../gourmetgate.persistence/src/generated/java";
   public static final String OUTPUT_PACKAGE = "app.gourmetgate.gourmetgate.persistence";
 
   public static void main(String[] args) {
-    new Environment().runWithConfig(new GeneratorApplication()::generate);
+    new JooqEnvironment().runWithConfig(new GeneratorApplication()::generate);
   }
 
   public void generate(DSLContext context) {
@@ -41,7 +37,9 @@ public class GeneratorApplication {
             .withName(PostgresDatabase.class.getName()).withIncludes(".*")
             .withInputSchema(CONFIG.getPropertyValue(SchemaProperty.class)).withOutputSchema("Schema")
             .withExcludes("SYS*.*"))
-        .withTarget(new Target().withPackageName(OUTPUT_PACKAGE)));
+      .withTarget(new Target()
+        .withDirectory(OUTPUT_DIRECTORY)
+        .withPackageName(OUTPUT_PACKAGE)));
 
     GenerationTool tool = new GenerationTool();
     try {

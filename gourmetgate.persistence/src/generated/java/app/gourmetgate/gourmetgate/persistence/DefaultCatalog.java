@@ -4,11 +4,11 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.jooq.Constants;
 import org.jooq.impl.CatalogImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -25,7 +25,7 @@ public class DefaultCatalog extends CatalogImpl {
   public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
   /**
-   * The schema <code>Schema</code>.
+   * standard public schema
    */
   public final Schema SCHEMA = Schema.SCHEMA;
 

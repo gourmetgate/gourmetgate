@@ -1,13 +1,14 @@
 package app.gourmetgate.gourmetgate.persistence.common;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
+
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 @ApplicationScoped
 public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> {
@@ -20,21 +21,21 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
   /**
    * @return the id column for the table object associated with this service.
    */
-  Field<String> getIdColumn();
+  Field<UUID> getIdColumn();
 
   /**
    * Deletes the record with the specified id
-   * 
+   *
    * @return the number of records deleted
    */
-  int remove(String id);
+  int remove(UUID id);
 
   /**
    * Gets the record for the specified id.
-   * 
+   *
    * @return the record for the id given or an empty {@link Optional} if the id could not be found.
    */
-  Optional<RECORD> get(String id);
+  Optional<RECORD> get(UUID id);
 
   /**
    * @return all available records.
@@ -45,7 +46,7 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
    * Persists the provided record based on the id specified. If no record with this id exists, a new record is created.
    * Otherwise the existing record is updated.
    */
-  void store(String id, RECORD record);
+  void store(UUID id, RECORD record);
 
   /**
    * @return A new empty record.

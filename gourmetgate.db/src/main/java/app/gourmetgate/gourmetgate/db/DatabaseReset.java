@@ -1,16 +1,17 @@
 package app.gourmetgate.gourmetgate.db;
 
 import app.gourmetgate.gourmetgate.db.common.AbstractInitialDataProvider;
+import app.gourmetgate.gourmetgate.db.common.HibernateSessionFactory;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.Collection;
 
-public class SchemaGenerator {
+public class DatabaseReset {
 
   public static void main(String[] args) {
-    Session session = HibernateSessionFactory.getSessionFactory().openSession();
+    Session session = HibernateSessionFactory.getSessionFactory(true).openSession();
     Transaction tx = session.beginTransaction();
     persistInitialData(session);
     tx.commit();

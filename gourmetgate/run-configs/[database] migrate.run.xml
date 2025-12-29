@@ -1,13 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="[setup] database schema" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="app.gourmetgate.gourmetgate.db.SchemaGenerator"/>
+  <configuration default="false" name="[database] migrate" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="app.gourmetgate.gourmetgate.db.DatabaseMigrateSchema"/>
     <module name="gourmetgate.db"/>
     <option name="VM_PARAMETERS"
             value="-Dscout.jandex.rebuild=true -Dconfig.properties=&quot;$MODULE_DIR$/../gourmetgate.app.dev/src/main/resources/dev.db.config.properties&quot;"/>
     <option name="WORKING_DIRECTORY" value="$MODULE_DIR$"/>
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="app.gourmetgate.gourmetgate.db.*"/>
+        <option name="PATTERN" value="app.gourmetgate.gourmetgate.db.common.*"/>
         <option name="ENABLED" value="true"/>
       </pattern>
     </extension>
