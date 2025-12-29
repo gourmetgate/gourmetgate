@@ -21,42 +21,42 @@ public class VatRecord extends UpdatableRecordImpl<VatRecord> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Setter for <code>Schema.vat.percentage</code>.
+   * Setter for <code>public.vat.percentage</code>.
    */
   public void setPercentage(BigDecimal value) {
     set(0, value);
   }
 
   /**
-   * Getter for <code>Schema.vat.percentage</code>.
+   * Getter for <code>public.vat.percentage</code>.
    */
   public BigDecimal getPercentage() {
     return (BigDecimal) get(0);
   }
 
   /**
-   * Setter for <code>Schema.vat.vat_id</code>.
+   * Setter for <code>public.vat.vat_id</code>.
    */
   public void setVatId(UUID value) {
     set(1, value);
   }
 
   /**
-   * Getter for <code>Schema.vat.vat_id</code>.
+   * Getter for <code>public.vat.vat_id</code>.
    */
   public UUID getVatId() {
     return (UUID) get(1);
   }
 
   /**
-   * Setter for <code>Schema.vat.description</code>.
+   * Setter for <code>public.vat.description</code>.
    */
   public void setDescription(String value) {
     set(2, value);
   }
 
   /**
-   * Getter for <code>Schema.vat.description</code>.
+   * Getter for <code>public.vat.description</code>.
    */
   public String getDescription() {
     return (String) get(2);

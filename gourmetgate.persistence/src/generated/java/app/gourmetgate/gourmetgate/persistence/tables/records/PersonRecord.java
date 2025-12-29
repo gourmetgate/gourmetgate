@@ -20,70 +20,70 @@ public class PersonRecord extends UpdatableRecordImpl<PersonRecord> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Setter for <code>Schema.person.person_id</code>.
+   * Setter for <code>public.person.person_id</code>.
    */
   public void setPersonId(UUID value) {
     set(0, value);
   }
 
   /**
-   * Getter for <code>Schema.person.person_id</code>.
+   * Getter for <code>public.person.person_id</code>.
    */
   public UUID getPersonId() {
     return (UUID) get(0);
   }
 
   /**
-   * Setter for <code>Schema.person.external</code>.
+   * Setter for <code>public.person.external</code>.
    */
   public void setExternal(Boolean value) {
     set(1, value);
   }
 
   /**
-   * Getter for <code>Schema.person.external</code>.
+   * Getter for <code>public.person.external</code>.
    */
   public Boolean getExternal() {
     return (Boolean) get(1);
   }
 
   /**
-     * Setter for <code>Schema.person.first_name</code>.
+   * Setter for <code>public.person.first_name</code>.
    */
   public void setFirstName(String value) {
     set(2, value);
   }
 
   /**
-   * Getter for <code>Schema.person.first_name</code>.
+   * Getter for <code>public.person.first_name</code>.
    */
   public String getFirstName() {
     return (String) get(2);
   }
 
   /**
-   * Setter for <code>Schema.person.last_name</code>.
+   * Setter for <code>public.person.last_name</code>.
    */
   public void setLastName(String value) {
     set(3, value);
   }
 
   /**
-   * Getter for <code>Schema.person.last_name</code>.
+   * Getter for <code>public.person.last_name</code>.
    */
   public String getLastName() {
     return (String) get(3);
   }
 
   /**
-   * Setter for <code>Schema.person.salary</code>.
+   * Setter for <code>public.person.salary</code>.
    */
   public void setSalary(Integer value) {
     set(4, value);
   }
 
   /**
-   * Getter for <code>Schema.person.salary</code>.
+   * Getter for <code>public.person.salary</code>.
    */
   public Integer getSalary() {
     return (Integer) get(4);

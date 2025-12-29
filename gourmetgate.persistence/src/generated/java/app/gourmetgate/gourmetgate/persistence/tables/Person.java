@@ -5,7 +5,7 @@ package app.gourmetgate.gourmetgate.persistence.tables;
 
 
 import app.gourmetgate.gourmetgate.persistence.Keys;
-import app.gourmetgate.gourmetgate.persistence.Schema;
+import app.gourmetgate.gourmetgate.persistence.Public;
 import app.gourmetgate.gourmetgate.persistence.tables.records.PersonRecord;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -25,7 +25,7 @@ public class Person extends TableImpl<PersonRecord> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * The reference instance of <code>Schema.person</code>
+   * The reference instance of <code>public.person</code>
    */
   public static final Person PERSON = new Person();
 
@@ -38,27 +38,27 @@ public class Person extends TableImpl<PersonRecord> {
   }
 
   /**
-   * The column <code>Schema.person.person_id</code>.
+   * The column <code>public.person.person_id</code>.
    */
   public final TableField<PersonRecord, UUID> PERSON_ID = createField(DSL.name("person_id"), SQLDataType.UUID.nullable(false), this, "");
 
   /**
-   * The column <code>Schema.person.external</code>.
+   * The column <code>public.person.external</code>.
    */
   public final TableField<PersonRecord, Boolean> EXTERNAL = createField(DSL.name("external"), SQLDataType.BOOLEAN, this, "");
 
   /**
-   * The column <code>Schema.person.first_name</code>.
+   * The column <code>public.person.first_name</code>.
    */
   public final TableField<PersonRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(255), this, "");
 
   /**
-   * The column <code>Schema.person.last_name</code>.
+   * The column <code>public.person.last_name</code>.
    */
   public final TableField<PersonRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(255), this, "");
 
   /**
-   * The column <code>Schema.person.salary</code>.
+   * The column <code>public.person.salary</code>.
    */
   public final TableField<PersonRecord, Integer> SALARY = createField(DSL.name("salary"), SQLDataType.INTEGER, this, "");
 
@@ -71,29 +71,29 @@ public class Person extends TableImpl<PersonRecord> {
   }
 
   /**
-   * Create an aliased <code>Schema.person</code> table reference
+   * Create an aliased <code>public.person</code> table reference
    */
   public Person(String alias) {
     this(DSL.name(alias), PERSON);
   }
 
   /**
-   * Create an aliased <code>Schema.person</code> table reference
+   * Create an aliased <code>public.person</code> table reference
    */
   public Person(Name alias) {
     this(alias, PERSON);
   }
 
   /**
-   * Create a <code>Schema.person</code> table reference
+   * Create a <code>public.person</code> table reference
    */
   public Person() {
     this(DSL.name("person"), null);
   }
 
   @Override
-  public org.jooq.Schema getSchema() {
-    return aliased() ? null : Schema.SCHEMA;
+  public Schema getSchema() {
+    return aliased() ? null : Public.PUBLIC;
   }
 
   @Override

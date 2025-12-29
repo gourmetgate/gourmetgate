@@ -18,31 +18,31 @@ import java.util.List;
 /**
  * standard public schema
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public class Schema extends SchemaImpl {
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+public class Public extends SchemaImpl {
 
   private static final long serialVersionUID = 1L;
 
   /**
-   * The reference instance of <code>Schema</code>
+   * The reference instance of <code>public</code>
    */
-  public static final Schema SCHEMA = new Schema();
+  public static final Public PUBLIC = new Public();
 
   /**
-   * The table <code>Schema.person</code>.
+   * The table <code>public.person</code>.
    */
   public final Person PERSON = Person.PERSON;
 
   /**
-   * The table <code>Schema.vat</code>.
+   * The table <code>public.vat</code>.
    */
   public final Vat VAT = Vat.VAT;
 
   /**
    * No further instances allowed
    */
-  private Schema() {
-    super(DSL.name("Schema"), null, DSL.comment("standard public schema"));
+  private Public() {
+    super(DSL.name("public"), null, DSL.comment("standard public schema"));
   }
 
 

@@ -16,7 +16,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables in
- * Schema.
+ * public.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Keys {

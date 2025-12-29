@@ -5,7 +5,7 @@ package app.gourmetgate.gourmetgate.persistence.tables;
 
 
 import app.gourmetgate.gourmetgate.persistence.Keys;
-import app.gourmetgate.gourmetgate.persistence.Schema;
+import app.gourmetgate.gourmetgate.persistence.Public;
 import app.gourmetgate.gourmetgate.persistence.tables.records.VatRecord;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -26,7 +26,7 @@ public class Vat extends TableImpl<VatRecord> {
   private static final long serialVersionUID = 1L;
 
   /**
-   * The reference instance of <code>Schema.vat</code>
+   * The reference instance of <code>public.vat</code>
    */
   public static final Vat VAT = new Vat();
 
@@ -39,17 +39,17 @@ public class Vat extends TableImpl<VatRecord> {
   }
 
   /**
-   * The column <code>Schema.vat.percentage</code>.
+   * The column <code>public.vat.percentage</code>.
    */
   public final TableField<VatRecord, BigDecimal> PERCENTAGE = createField(DSL.name("percentage"), SQLDataType.NUMERIC(38, 2), this, "");
 
   /**
-   * The column <code>Schema.vat.vat_id</code>.
+   * The column <code>public.vat.vat_id</code>.
    */
   public final TableField<VatRecord, UUID> VAT_ID = createField(DSL.name("vat_id"), SQLDataType.UUID.nullable(false), this, "");
 
   /**
-   * The column <code>Schema.vat.description</code>.
+   * The column <code>public.vat.description</code>.
    */
   public final TableField<VatRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.VARCHAR(255), this, "");
 
@@ -62,29 +62,29 @@ public class Vat extends TableImpl<VatRecord> {
   }
 
   /**
-   * Create an aliased <code>Schema.vat</code> table reference
+   * Create an aliased <code>public.vat</code> table reference
    */
   public Vat(String alias) {
     this(DSL.name(alias), VAT);
   }
 
   /**
-   * Create an aliased <code>Schema.vat</code> table reference
+   * Create an aliased <code>public.vat</code> table reference
    */
   public Vat(Name alias) {
     this(alias, VAT);
   }
 
   /**
-   * Create a <code>Schema.vat</code> table reference
+   * Create a <code>public.vat</code> table reference
    */
   public Vat() {
     this(DSL.name("vat"), null);
   }
 
   @Override
-  public org.jooq.Schema getSchema() {
-    return aliased() ? null : Schema.SCHEMA;
+  public Schema getSchema() {
+    return aliased() ? null : Public.PUBLIC;
   }
 
   @Override
