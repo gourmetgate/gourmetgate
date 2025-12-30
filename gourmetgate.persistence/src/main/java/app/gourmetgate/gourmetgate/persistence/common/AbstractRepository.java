@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
 
-public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> implements IBaseService<TABLE, RECORD, DO> {
+public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> implements IBaseRepository<TABLE, RECORD, DO> {
 
   protected abstract DoEntityBeanMappings<DO, RECORD> mappings();
 
@@ -31,7 +31,7 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
   }
 
   @Override
-  public int remove(UUID id) {
+  public int delete(UUID id) {
     return jooq()
         .deleteFrom(getTable())
         .where(getIdColumn().eq(id))
@@ -55,15 +55,15 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
   }
 
   @Override
-  public void store(UUID id, RECORD record) {
+  public int store(UUID id, RECORD record) {
     if (exists(id)) {
-      jooq()
+      return jooq()
         .update(getTable())
         .set(record)
         .where(getIdColumn().eq(id))
         .execute();
     } else {
-      jooq()
+      return jooq()
         .insertInto(getTable())
         .set(record)
         .execute();

@@ -13,6 +13,7 @@ import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -41,7 +42,12 @@ public class Vat extends TableImpl<VatRecord> {
   /**
    * The column <code>public.vat.percentage</code>.
    */
-  public final TableField<VatRecord, BigDecimal> PERCENTAGE = createField(DSL.name("percentage"), SQLDataType.NUMERIC(38, 2), this, "");
+  public final TableField<VatRecord, BigDecimal> PERCENTAGE = createField(DSL.name("percentage"), SQLDataType.NUMERIC(38, 2).nullable(false), this, "");
+
+  /**
+   * The column <code>public.vat.sort_code</code>.
+   */
+  public final TableField<VatRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
 
   /**
    * The column <code>public.vat.vat_id</code>.
@@ -52,6 +58,11 @@ public class Vat extends TableImpl<VatRecord> {
    * The column <code>public.vat.description</code>.
    */
   public final TableField<VatRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.VARCHAR(255), this, "");
+
+  /**
+   * The column <code>public.vat.status</code>.
+   */
+  public final TableField<VatRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
   private Vat(Name alias, Table<VatRecord> aliased) {
     this(alias, aliased, (Field<?>[]) null, null);

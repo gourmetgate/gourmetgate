@@ -1,7 +1,7 @@
-import {AbstractRestClient, PersonDo, PersonRestrictionDo} from '../index';
+import {AbstractPersonRestClient, PersonDo, PersonRestrictionDo} from '../index';
 import {systems} from '@eclipse-scout/core';
 
-export class PersonRestClient extends AbstractRestClient {
+export class PersonRestClient extends AbstractPersonRestClient {
 
   static DATA_TYPE = 'person';
 

@@ -1,4 +1,15 @@
-import {AggregateTableControl, BooleanColumn, Column, icons, Menu, NumberColumn, PageWithTable, PageWithTableModel, SearchFormTableControl, Table} from '@eclipse-scout/core';
+import {
+  AggregateTableControl,
+  BooleanColumn,
+  Column,
+  icons,
+  Menu,
+  NumberColumn,
+  PageWithTable,
+  PageWithTableModel,
+  SearchFormTableControl,
+  Table
+} from '@eclipse-scout/core';
 import {PersonSearchForm} from '../index';
 import {PersonSearchFormWidgetMap} from './PersonSearchFormModel';
 

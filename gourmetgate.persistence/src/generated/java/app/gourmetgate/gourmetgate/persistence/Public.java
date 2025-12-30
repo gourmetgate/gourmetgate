@@ -4,6 +4,8 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
+import app.gourmetgate.gourmetgate.persistence.tables.Category;
+import app.gourmetgate.gourmetgate.persistence.tables.Item;
 import app.gourmetgate.gourmetgate.persistence.tables.Person;
 import app.gourmetgate.gourmetgate.persistence.tables.Vat;
 import org.jooq.Catalog;
@@ -29,12 +31,22 @@ public class Public extends SchemaImpl {
   public static final Public PUBLIC = new Public();
 
   /**
+   * The table <code>public.category</code>.
+   */
+  public final Category CATEGORY = Category.CATEGORY;
+
+  /**
+   * The table <code>public.item</code>.
+   */
+  public final Item ITEM = Item.ITEM;
+
+  /**
    * The table <code>public.person</code>.
    */
   public final Person PERSON = Person.PERSON;
 
   /**
-   * The table <code>public.vat</code>.
+     * The table <code>public.vat</code>.
    */
   public final Vat VAT = Vat.VAT;
 
@@ -54,6 +66,8 @@ public class Public extends SchemaImpl {
   @Override
   public final List<Table<?>> getTables() {
     return Arrays.asList(
+      Category.CATEGORY,
+      Item.ITEM,
       Person.PERSON,
       Vat.VAT
     );

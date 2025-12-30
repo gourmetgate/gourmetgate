@@ -1,4 +1,15 @@
-import {EventHandler, InitModelOf, MessageBox, MessageBoxes, ObjectOrModel, PageWithTable, PageWithTableModel, scout, Table, TableRow} from '@eclipse-scout/core';
+import {
+  EventHandler,
+  InitModelOf,
+  MessageBox,
+  MessageBoxes,
+  ObjectOrModel,
+  PageWithTable,
+  PageWithTableModel,
+  scout,
+  Table,
+  TableRow
+} from '@eclipse-scout/core';
 import {DataChangeEvent, PersonDo, PersonForm, PersonRestClient, PersonRestrictionDo} from '../index';
 import PersonTablePageModel, {PersonTablePageTable} from './PersonTablePageModel';
 

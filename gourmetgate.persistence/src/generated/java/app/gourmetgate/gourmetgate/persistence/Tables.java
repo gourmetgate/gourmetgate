@@ -4,6 +4,8 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
+import app.gourmetgate.gourmetgate.persistence.tables.Category;
+import app.gourmetgate.gourmetgate.persistence.tables.Item;
 import app.gourmetgate.gourmetgate.persistence.tables.Person;
 import app.gourmetgate.gourmetgate.persistence.tables.Vat;
 
@@ -13,6 +15,16 @@ import app.gourmetgate.gourmetgate.persistence.tables.Vat;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+  /**
+   * The table <code>public.category</code>.
+   */
+  public static final Category CATEGORY = Category.CATEGORY;
+
+  /**
+   * The table <code>public.item</code>.
+   */
+  public static final Item ITEM = Item.ITEM;
 
   /**
    * The table <code>public.person</code>.
