@@ -14,9 +14,9 @@ public class VatDataProvider extends AbstractInitialDataProvider<VatEntity> {
   @Override
   public List<VatEntity> getInitialData() {
     VatEntity entity = new VatEntity();
-    entity.setVatId(VAT_STANDARD_CH_ID);
-    entity.setPercentage(new BigDecimal("8.1"));
-    entity.setDescription("Default VAT of Switzerland");
+    entity.vatId = VAT_STANDARD_CH_ID;
+    entity.percentage = new BigDecimal("8.1");
+    entity.description = "Default VAT of Switzerland";
     return List.of(entity);
   }
 }

@@ -34,7 +34,7 @@ public class PersonService implements IService {
 
   public int remove(UUID id) {
     //TODO add validation and business logic here
-    return BEANS.get(IPersonRepository.class).remove(id);
+    return BEANS.get(IPersonRepository.class).delete(id);
   }
 
   public Stream<PersonDo> list(PersonRestrictionDo restrictions, int numberOfRows) {

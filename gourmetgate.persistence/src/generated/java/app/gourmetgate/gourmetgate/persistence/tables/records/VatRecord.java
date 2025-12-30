@@ -9,6 +9,7 @@ import org.jooq.Record1;
 import org.jooq.impl.UpdatableRecordImpl;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 
@@ -35,31 +36,59 @@ public class VatRecord extends UpdatableRecordImpl<VatRecord> {
   }
 
   /**
-   * Setter for <code>public.vat.vat_id</code>.
+   * Setter for <code>public.vat.sort_code</code>.
    */
-  public void setVatId(UUID value) {
+  public void setSortCode(OffsetDateTime value) {
     set(1, value);
   }
 
   /**
-   * Getter for <code>public.vat.vat_id</code>.
+   * Getter for <code>public.vat.sort_code</code>.
+   */
+  public OffsetDateTime getSortCode() {
+    return (OffsetDateTime) get(1);
+  }
+
+  /**
+   * Setter for <code>public.vat.vat_id</code>.
+   */
+  public void setVatId(UUID value) {
+    set(2, value);
+  }
+
+  /**
+     * Getter for <code>public.vat.vat_id</code>.
    */
   public UUID getVatId() {
-    return (UUID) get(1);
+    return (UUID) get(2);
   }
 
   /**
    * Setter for <code>public.vat.description</code>.
    */
   public void setDescription(String value) {
-    set(2, value);
+    set(3, value);
   }
 
   /**
    * Getter for <code>public.vat.description</code>.
    */
   public String getDescription() {
-    return (String) get(2);
+    return (String) get(3);
+  }
+
+  /**
+   * Setter for <code>public.vat.status</code>.
+   */
+  public void setStatus(String value) {
+    set(4, value);
+  }
+
+  /**
+   * Getter for <code>public.vat.status</code>.
+   */
+  public String getStatus() {
+    return (String) get(4);
   }
 
   // -------------------------------------------------------------------------
@@ -85,12 +114,14 @@ public class VatRecord extends UpdatableRecordImpl<VatRecord> {
   /**
    * Create a detached, initialised VatRecord
    */
-  public VatRecord(BigDecimal percentage, UUID vatId, String description) {
+  public VatRecord(BigDecimal percentage, OffsetDateTime sortCode, UUID vatId, String description, String status) {
     super(Vat.VAT);
 
     setPercentage(percentage);
+    setSortCode(sortCode);
     setVatId(vatId);
     setDescription(description);
+    setStatus(status);
     resetTouchedOnNotNull();
   }
 }
