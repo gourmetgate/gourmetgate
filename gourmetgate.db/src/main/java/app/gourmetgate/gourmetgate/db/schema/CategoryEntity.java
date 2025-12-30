@@ -6,19 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(name = "vat")
-public class VatEntity extends OrderableEntityWithStatus {
+@Table(name = "category")
+public class CategoryEntity extends OrderableEntityWithStatus {
 
   @Id
-  public UUID vatId;
+  public UUID categoryId;
 
-  @Column(nullable = false)
-  public BigDecimal percentage;
+  @Column(length = 80, nullable = false)
+  public String name;
 
-  @Column(nullable = false)
-  public String description;
 }

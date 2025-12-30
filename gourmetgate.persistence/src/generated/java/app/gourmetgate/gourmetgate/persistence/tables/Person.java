@@ -38,14 +38,19 @@ public class Person extends TableImpl<PersonRecord> {
   }
 
   /**
-   * The column <code>public.person.person_id</code>.
-   */
-  public final TableField<PersonRecord, UUID> PERSON_ID = createField(DSL.name("person_id"), SQLDataType.UUID.nullable(false), this, "");
-
-  /**
    * The column <code>public.person.external</code>.
    */
   public final TableField<PersonRecord, Boolean> EXTERNAL = createField(DSL.name("external"), SQLDataType.BOOLEAN, this, "");
+
+  /**
+   * The column <code>public.person.salary</code>.
+   */
+  public final TableField<PersonRecord, Integer> SALARY = createField(DSL.name("salary"), SQLDataType.INTEGER, this, "");
+
+  /**
+   * The column <code>public.person.person_id</code>.
+   */
+  public final TableField<PersonRecord, UUID> PERSON_ID = createField(DSL.name("person_id"), SQLDataType.UUID.nullable(false), this, "");
 
   /**
    * The column <code>public.person.first_name</code>.
@@ -53,14 +58,9 @@ public class Person extends TableImpl<PersonRecord> {
   public final TableField<PersonRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(255), this, "");
 
   /**
-   * The column <code>public.person.last_name</code>.
+     * The column <code>public.person.last_name</code>.
    */
   public final TableField<PersonRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(255), this, "");
-
-  /**
-   * The column <code>public.person.salary</code>.
-   */
-  public final TableField<PersonRecord, Integer> SALARY = createField(DSL.name("salary"), SQLDataType.INTEGER, this, "");
 
   private Person(Name alias, Table<PersonRecord> aliased) {
     this(alias, aliased, (Field<?>[]) null, null);

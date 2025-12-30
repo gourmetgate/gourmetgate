@@ -10,15 +10,26 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(name = "vat")
-public class VatEntity extends OrderableEntityWithStatus {
+@Table(name = "item")
+public class ItemEntity extends OrderableEntityWithStatus {
 
   @Id
+  public UUID itemId;
+
+  @Column(nullable = false)
+  public UUID categoryId;
+
+  @Column(nullable = false)
   public UUID vatId;
 
-  @Column(nullable = false)
-  public BigDecimal percentage;
+  @Column(length = 80, nullable = false)
+  public String name;
 
   @Column(nullable = false)
-  public String description;
+  public BigDecimal price;
+
+  public BigDecimal cost;
+
+  @Column(nullable = false)
+  public boolean available = true;
 }
