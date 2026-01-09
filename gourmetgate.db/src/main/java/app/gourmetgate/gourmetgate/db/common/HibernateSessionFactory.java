@@ -12,17 +12,12 @@ import org.hibernate.service.ServiceRegistry;
 @ApplicationScoped
 public class HibernateSessionFactory {
 
-  public static SessionFactory SESSION_FACTORY;
-
-  public static SessionFactory getSessionFactory() {
-    return getSessionFactory(false);
+  public SessionFactory createSessionFactory() {
+    return createSessionFactory(false);
   }
 
-  public static SessionFactory getSessionFactory(boolean reset) {
-    if (SESSION_FACTORY == null) {
-      SESSION_FACTORY = new HibernateSessionFactory().buildSessionFactory(reset);
-    }
-    return SESSION_FACTORY;
+  public SessionFactory createSessionFactory(boolean reset) {
+    return new HibernateSessionFactory().buildSessionFactory(reset);
   }
 
   protected void registerEntityClasses(Configuration configuration) {

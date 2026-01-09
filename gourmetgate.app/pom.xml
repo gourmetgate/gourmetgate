@@ -25,6 +25,10 @@
       <groupId>app.gourmetgate</groupId>
       <artifactId>gourmetgate.persistence</artifactId>
     </dependency>
+    <dependency>
+      <groupId>app.gourmetgate</groupId>
+      <artifactId>gourmetgate.db</artifactId>
+    </dependency>
 
     <!-- Scout UI app (Jetty) -->
     <dependency>
