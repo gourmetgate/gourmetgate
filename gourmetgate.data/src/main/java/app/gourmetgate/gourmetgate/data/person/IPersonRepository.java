@@ -15,7 +15,7 @@ public interface IPersonRepository {
 
   Optional<PersonDo> getById(UUID id);
 
-  int remove(UUID id);
+  int delete(UUID id);
 
   PersonDo create(PersonDo person);
 }

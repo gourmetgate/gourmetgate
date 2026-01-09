@@ -11,7 +11,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @ApplicationScoped
-public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> {
+public interface IBaseRepository<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> {
 
   /**
    * @return the table object associated with this service.
@@ -24,11 +24,9 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
   Field<UUID> getIdColumn();
 
   /**
-   * Deletes the record with the specified id
-   *
-   * @return the number of records deleted
+   * @return all available records.
    */
-  int remove(UUID id);
+  Stream<RECORD> getAll();
 
   /**
    * Gets the record for the specified id.
@@ -38,9 +36,9 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
   Optional<RECORD> get(UUID id);
 
   /**
-   * @return all available records.
+   * @return A new empty record.
    */
-  Stream<RECORD> getAll();
+  RECORD newRecord();
 
   /**
    * Persists the provided record based on the id specified. If no record with this id exists, a new record is created.
@@ -49,8 +47,10 @@ public interface IBaseService<TABLE extends Table<RECORD>, RECORD extends Record
   void store(UUID id, RECORD record);
 
   /**
-   * @return A new empty record.
+   * Deletes the record with the specified id
+   *
+   * @return the number of records deleted
    */
-  RECORD newRecord();
+  int delete(UUID id);
 
 }

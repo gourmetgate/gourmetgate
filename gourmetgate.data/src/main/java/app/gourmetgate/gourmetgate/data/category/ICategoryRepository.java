@@ -1,21 +1,9 @@
 package app.gourmetgate.gourmetgate.data.category;
 
+import app.gourmetgate.gourmetgate.data.common.IEntityRepository;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Stream;
-
 @ApplicationScoped
-public interface ICategoryRepository {
+public interface ICategoryRepository extends IEntityRepository<CategoryPersistenceDo> {
 
-  Stream<CategoryPersistenceDo> getAllActive();
-
-  Optional<CategoryPersistenceDo> getById(UUID id);
-
-  CategoryPersistenceDo create(CategoryPersistenceDo category);
-
-  void store(UUID id, CategoryPersistenceDo category);
-
-  int delete(UUID id);
 }
