@@ -1,5 +1,6 @@
 package app.gourmetgate.gourmetgate.persistence.item;
 
+import app.gourmetgate.gourmetgate.data.item.IItemRepository;
 import app.gourmetgate.gourmetgate.data.item.ItemPersistenceDo;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
@@ -9,9 +10,14 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.jooq.Field;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
-public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, ItemPersistenceDo> {
+import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.noCondition;
+
+public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, ItemPersistenceDo> implements IItemRepository {
 
   @Override
   public Item getTable() {
@@ -31,6 +37,17 @@ public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, I
   @Override
   public Field<String> getStatusColumn() {
     return getTable().STATUS;
+  }
+
+  @Override
+  public Stream<ItemPersistenceDo> getItemsByCategory(List<UUID> categoryIds, boolean availableOnly) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(
+        getTable().CATEGORY_ID.in(categoryIds),
+        availableOnly ? getTable().AVAILABLE.eq(true) : noCondition())
+      .fetchStream()
+      .map(this::toNewDo);
   }
 
   @Override
