@@ -1,12 +1,15 @@
 package app.gourmetgate.gourmetgate.data.item;
 
+import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@TypeName("gourmetgate.Item")
 public class ItemDo extends DoEntity {
 
   public DoValue<UUID> itemId() {
@@ -17,8 +20,8 @@ public class ItemDo extends DoEntity {
     return doValue("categoryId");
   }
 
-  public DoValue<UUID> vatId() {
-    return doValue("vatId");
+  public DoValue<VatDo> vat() {
+    return doValue("vat");
   }
 
   public DoValue<String> name() {
@@ -66,14 +69,14 @@ public class ItemDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public ItemDo withVatId(UUID vatId) {
-    vatId().set(vatId);
+  public ItemDo withVat(VatDo vat) {
+    vat().set(vat);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public UUID getVatId() {
-    return vatId().get();
+  public VatDo getVat() {
+    return vat().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

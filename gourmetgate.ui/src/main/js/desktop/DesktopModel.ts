@@ -1,5 +1,5 @@
 import {DesktopModel, Menu} from '@eclipse-scout/core';
-import {DataOutline, Desktop} from '../index';
+import {AdminOutline, Desktop} from '../index';
 
 export default (): DesktopModel => ({
   id: 'gourmetgate.Desktop',
@@ -10,7 +10,7 @@ export default (): DesktopModel => ({
     iconId: 'img/eclipse_scout_logo.png'
   },
   outline: {
-    objectType: DataOutline
+    objectType: AdminOutline
   },
   menus: [
     {
@@ -38,6 +38,10 @@ export default (): DesktopModel => ({
     }
   ]
 });
+
+/* **************************************************************************
+* GENERATED WIDGET MAPS
+* **************************************************************************/
 
 export type DesktopWidgetMap = {
   'ThemeMenu': Menu;

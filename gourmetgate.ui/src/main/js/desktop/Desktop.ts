@@ -1,4 +1,15 @@
-import {App, Desktop as ScoutDesktop, DesktopModel as ScoutDesktopModel, Event, Form, GroupBox, LabelField, icons, InitModelOf, scout} from '@eclipse-scout/core';
+import {
+  App,
+  Desktop as ScoutDesktop,
+  DesktopModel as ScoutDesktopModel,
+  Event,
+  Form,
+  GroupBox,
+  icons,
+  InitModelOf,
+  LabelField,
+  scout
+} from '@eclipse-scout/core';
 import DesktopModel, {DesktopWidgetMap} from './DesktopModel';
 
 export class Desktop extends ScoutDesktop {

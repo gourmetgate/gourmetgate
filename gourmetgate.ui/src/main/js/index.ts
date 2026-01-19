@@ -1,9 +1,11 @@
 import {ObjectFactory} from '@eclipse-scout/core';
+import * as self from './index';
 
 export * from './App';
 export * from './objectFactories';
 export * from './desktop/Desktop';
-export * from './desktop/DataOutline';
+export * from './admin/AdminOutline';
+export * from './admin/catalog/CatalogTablePage';
 export * from './rest/AbstractItemResponse';
 export * from './rest/AbstractRestClient';
 export * from './person/PersonDo';
@@ -14,6 +16,5 @@ export * from './person/PersonRestrictionDo';
 export * from './person/PersonSearchForm';
 export * from './person/PersonTablePage';
 
-import * as self from './index';
 export default self;
 ObjectFactory.get().registerNamespace('gourmetgate', self);
