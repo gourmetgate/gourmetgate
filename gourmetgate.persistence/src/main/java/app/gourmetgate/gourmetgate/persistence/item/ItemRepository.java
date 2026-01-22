@@ -2,6 +2,7 @@ package app.gourmetgate.gourmetgate.persistence.item;
 
 import app.gourmetgate.gourmetgate.data.item.IItemRepository;
 import app.gourmetgate.gourmetgate.data.item.ItemPersistenceDo;
+import app.gourmetgate.gourmetgate.data.query.ItemRestrictionDo;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import app.gourmetgate.gourmetgate.persistence.tables.Item;
@@ -37,6 +38,18 @@ public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, I
   @Override
   public Field<String> getStatusColumn() {
     return getTable().STATUS;
+  }
+
+  @Override
+  public Stream<ItemPersistenceDo> list(ItemRestrictionDo restriction) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(
+        restriction.categories().exists() ? getTable().CATEGORY_ID.in(restriction.getCategories()) : noCondition(),
+        restriction.available().exists() ? getTable().AVAILABLE.eq(restriction.isAvailable()) : noCondition()
+      )
+      .fetchStream()
+      .map(this::toNewDo);
   }
 
   @Override

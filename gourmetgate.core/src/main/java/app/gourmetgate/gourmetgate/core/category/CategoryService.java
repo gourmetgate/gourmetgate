@@ -5,6 +5,7 @@ import app.gourmetgate.gourmetgate.core.item.ItemService;
 import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.category.ICategoryRepository;
 import app.gourmetgate.gourmetgate.data.item.ItemDo;
+import app.gourmetgate.gourmetgate.data.query.CategoryRestrictionDo;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
 
@@ -13,6 +14,12 @@ import java.util.Map;
 import java.util.UUID;
 
 public class CategoryService implements IService {
+
+  public List<CategoryDo> list(CategoryRestrictionDo restriction) {
+    return BEANS.get(ICategoryRepository.class).getAllActive()
+      .map(persistenceDo -> BEANS.get(DoHelper.class).autoMap(CategoryDo.class, persistenceDo))
+      .toList();
+  }
 
   public List<CategoryDo> getCategories(boolean onlyAvailable) {
     List<CategoryDo> categories = BEANS.get(ICategoryRepository.class).getAllActive()
