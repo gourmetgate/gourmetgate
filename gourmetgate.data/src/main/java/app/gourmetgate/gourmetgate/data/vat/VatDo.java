@@ -3,10 +3,12 @@ package app.gourmetgate.gourmetgate.data.vat;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@TypeName("gourmetgate.Vat")
 public class VatDo extends DoEntity {
 
   public DoValue<UUID> vatId() {

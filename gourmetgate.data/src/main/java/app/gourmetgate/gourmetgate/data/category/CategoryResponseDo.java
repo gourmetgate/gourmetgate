@@ -3,11 +3,13 @@ package app.gourmetgate.gourmetgate.data.category;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoList;
+import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.util.Collection;
 import java.util.List;
 
-public class CategoryResponse extends DoEntity {
+@TypeName("gourmetgate.CategoryResponse")
+public class CategoryResponseDo extends DoEntity {
 
   public DoList<CategoryDo> categories() {
     return doList("categories");
@@ -18,13 +20,13 @@ public class CategoryResponse extends DoEntity {
    * *************************************************************************/
 
   @Generated("DoConvenienceMethodsGenerator")
-  public CategoryResponse withCategories(Collection<? extends CategoryDo> categories) {
+  public CategoryResponseDo withCategories(Collection<? extends CategoryDo> categories) {
     categories().updateAll(categories);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public CategoryResponse withCategories(CategoryDo... categories) {
+  public CategoryResponseDo withCategories(CategoryDo... categories) {
     categories().updateAll(categories);
     return this;
   }

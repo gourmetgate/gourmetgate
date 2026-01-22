@@ -4,8 +4,15 @@ import * as self from './index';
 export * from './App';
 export * from './objectFactories';
 export * from './desktop/Desktop';
+
+export * from './data/VatDo';
+export * from './data/ItemDo';
+export * from './data/CategoryDo';
+export * from './data/CategoryResponseDo';
+
 export * from './admin/AdminOutline';
 export * from './admin/catalog/CatalogTablePage';
+export * from './admin/catalog/CategoryRestClient';
 export * from './rest/AbstractItemResponse';
 export * from './rest/AbstractRestClient';
 export * from './person/PersonDo';
