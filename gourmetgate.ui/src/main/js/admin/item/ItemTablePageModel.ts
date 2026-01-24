@@ -1,12 +1,15 @@
 import {BooleanColumn, Column, PageWithTable, PageWithTableModel, Table} from '@eclipse-scout/core';
+import {CurrencyColumn, PercentageColumn} from '../../index';
 
 export default (): PageWithTableModel => ({
   objectType: PageWithTable,
   leaf: true,
-  text: '${textKey:ProductCatalog}',
+  text: '${textKey:Items}',
   detailTable: {
+    id: 'ItemTable',
     objectType: Table,
     autoResizeColumns: true,
+
     columns: [
       {
         id: 'IdColumn',
@@ -22,6 +25,15 @@ export default (): PageWithTableModel => ({
         width: 300
       },
       {
+        id: 'CategoryNameColumn',
+        objectType: Column,
+        text: '${textKey:Category}',
+        width: 200,
+        grouped: true,
+        sortActive: true,
+        sortAscending: true
+      },
+      {
         id: 'AvailableColumn',
         objectType: BooleanColumn,
         text: '${textKey:Available}',
@@ -29,19 +41,19 @@ export default (): PageWithTableModel => ({
       },
       {
         id: 'PriceColumn',
-        objectType: Column,
+        objectType: CurrencyColumn,
         text: '${textKey:Price}',
         width: 200
       },
       {
         id: 'CostColumn',
-        objectType: Column,
+        objectType: CurrencyColumn,
         text: '${textKey:Cost}',
         width: 200
       },
       {
         id: 'VatColumn',
-        objectType: Column,
+        objectType: PercentageColumn,
         text: '${textKey:Vat}',
         width: 200
       }
@@ -53,15 +65,16 @@ export default (): PageWithTableModel => ({
 * GENERATED WIDGET MAPS
 * **************************************************************************/
 
-export class CatalogTablePageTable extends Table {
-  declare columnMap: CatalogTablePageTableColumnMap;
+export class ItemTable extends Table {
+  declare columnMap: ItemTableColumnMap;
 }
 
-export type CatalogTablePageTableColumnMap = {
+export type ItemTableColumnMap = {
   'IdColumn': Column;
   'NameColumn': Column;
+  'CategoryNameColumn': Column;
   'AvailableColumn': BooleanColumn;
-  'PriceColumn': Column;
-  'CostColumn': Column;
-  'VatColumn': Column;
+  'PriceColumn': CurrencyColumn;
+  'CostColumn': CurrencyColumn;
+  'VatColumn': PercentageColumn;
 };

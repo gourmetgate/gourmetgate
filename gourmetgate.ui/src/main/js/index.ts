@@ -15,9 +15,16 @@ export * from './data/VatRestrictionDo';
 export * from './data/QueryRestrictionDo';
 export * from './data/QueryResponseDo';
 
+export * from './common/TableRowWithEntity';
+export * from './common/CurrencyColumn';
+export * from './common/PercentageColumn';
+
+export * from './rest/QueryRestClient';
+
 export * from './admin/AdminOutline';
-export * from './admin/catalog/CatalogTablePage';
-export * from './admin/catalog/CategoryRestClient';
+export * from './admin/item/ItemTablePage';
+export * from './admin/category/CategoryTablePage';
+export * from './admin/vat/VatTablePage';
 export * from './rest/AbstractItemResponse';
 export * from './rest/AbstractRestClient';
 export * from './person/PersonDo';
