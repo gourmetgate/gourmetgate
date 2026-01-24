@@ -9,6 +9,11 @@ export * from './data/VatDo';
 export * from './data/ItemDo';
 export * from './data/CategoryDo';
 export * from './data/CategoryResponseDo';
+export * from './data/CategoryRestrictionDo';
+export * from './data/ItemRestrictionDo';
+export * from './data/VatRestrictionDo';
+export * from './data/QueryRestrictionDo';
+export * from './data/QueryResponseDo';
 
 export * from './admin/AdminOutline';
 export * from './admin/catalog/CatalogTablePage';

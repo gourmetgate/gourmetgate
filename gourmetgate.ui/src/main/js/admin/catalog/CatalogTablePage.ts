@@ -1,6 +1,7 @@
 import {BaseDoEntity, ObjectOrModel, PageWithTable, PageWithTableModel, scout, TableRow} from "@eclipse-scout/core";
 import CatalogTablePageModel, {CatalogTablePageTable} from "./CatalogTablePageModel";
-import {CategoryDo, CategoryRestClient, ItemDo} from "../../index";
+import {CategoryDo, ItemDo, QueryResponseDo, VatDo} from "../../index";
+import {QueryRestClient} from "../../rest/QueryRestClient";
 
 export class CatalogTablePage extends PageWithTable {
   declare detailTable: CatalogTablePageTable;
@@ -9,18 +10,22 @@ export class CatalogTablePage extends PageWithTable {
     return CatalogTablePageModel();
   }
 
-  protected override _loadTableData(): JQuery.Promise<CategoryDo[]> {
-    return scout.create(CategoryRestClient).getAllCategories(false);
+  protected override _loadTableData(): JQuery.Promise<QueryResponseDo> {
+    return scout.create(QueryRestClient).queryData({
+      categoryRestriction: {},
+      itemRestriction: {},
+      vatRestriction: {}
+    })
   }
 
-  protected override _transformTableDataToTableRows(tableData: CategoryDo[]): ObjectOrModel<TableRowWithEntity>[] {
-    let categoryRows = tableData
+  protected override _transformTableDataToTableRows(tableData: QueryResponseDo): ObjectOrModel<TableRowWithEntity>[] {
+    let categoryRows = tableData.categories
       .map(category => this._createCategoryRow(category));
 
-    let itemRows = tableData
-      .map(c => c.items)
-      .flat(1)
-      .map(item => this._createItemRow(item));
+    let vatById = new Map(tableData.vat.map(vat => [vat.vatId, vat]));
+
+    let itemRows = tableData.items
+      .map(item => this._createItemRow(item, vatById.get(item.vatId)));
 
     return categoryRows.concat(itemRows);
   }
@@ -37,7 +42,7 @@ export class CatalogTablePage extends PageWithTable {
     }
   }
 
-  protected _createItemRow(item: ItemDo): ObjectOrModel<TableRowWithEntity> {
+  protected _createItemRow(item: ItemDo, vat: VatDo): ObjectOrModel<TableRowWithEntity> {
     return {
       id: item.itemId,
       parentRow: item.categoryId,
@@ -48,7 +53,7 @@ export class CatalogTablePage extends PageWithTable {
         item.available,
         item.price,
         item.cost,
-        item.vat.percentage
+        vat.percentage
       ]
     }
   }
