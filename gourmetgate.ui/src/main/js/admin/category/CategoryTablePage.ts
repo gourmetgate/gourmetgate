@@ -1,6 +1,6 @@
 import {ObjectOrModel, PageWithTable, scout, TreeNodeModel} from "@eclipse-scout/core";
 import CategoryTablePageModel, {CategoryTable} from './CategoryTablePageModel';
-import {CategoryDo, QueryResponseDo, QueryRestClient, TableRowWithEntity} from "../../index";
+import {CategoryDo, CategoryRestClient, TableRowWithEntity} from "../../index";
 
 export class CategoryTablePage extends PageWithTable {
 
@@ -10,14 +10,12 @@ export class CategoryTablePage extends PageWithTable {
     return CategoryTablePageModel();
   }
 
-  protected override _loadTableData(): JQuery.Promise<QueryResponseDo> {
-    return scout.create(QueryRestClient).queryData({
-      categoryRestriction: {}
-    })
+  protected override _loadTableData(): JQuery.Promise<CategoryDo[]> {
+    return scout.create(CategoryRestClient).getAll();
   }
 
-  protected override _transformTableDataToTableRows(tableData: QueryResponseDo): ObjectOrModel<TableRowWithEntity>[] {
-    return tableData.categories
+  protected override _transformTableDataToTableRows(tableData: CategoryDo[]): ObjectOrModel<TableRowWithEntity>[] {
+    return tableData
       .map(category => this._createCategoryRow(category));
   }
 

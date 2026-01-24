@@ -1,36 +1,63 @@
 package app.gourmetgate.gourmetgate.core.category;
 
 import app.gourmetgate.gourmetgate.core.common.DoHelper;
-import app.gourmetgate.gourmetgate.core.item.ItemService;
+import app.gourmetgate.gourmetgate.core.common.EntityNotFoundException;
 import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.category.ICategoryRepository;
-import app.gourmetgate.gourmetgate.data.item.ItemDo;
 import app.gourmetgate.gourmetgate.data.query.CategoryRestrictionDo;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
+import org.eclipse.scout.rt.platform.util.LazyValue;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class CategoryService implements IService {
 
+  protected LazyValue<DoHelper> helper = new LazyValue<>(DoHelper.class);
+
   public List<CategoryDo> list(CategoryRestrictionDo restriction) {
     return BEANS.get(ICategoryRepository.class).getAllActive()
-      .map(persistenceDo -> BEANS.get(DoHelper.class).autoMap(CategoryDo.class, persistenceDo))
       .toList();
   }
 
-  public List<CategoryDo> getCategories(boolean onlyAvailable) {
-    List<CategoryDo> categories = BEANS.get(ICategoryRepository.class).getAllActive()
-      .map(persistenceDo -> BEANS.get(DoHelper.class).autoMap(CategoryDo.class, persistenceDo))
-      .toList();
+  public CategoryDo getById(UUID id) {
+    // Permission check required
 
-    List<UUID> categoryIds = categories.stream().map(CategoryDo::getCategoryId).toList();
-    Map<UUID, List<ItemDo>> itemsByCategory = BEANS.get(ItemService.class).getItemsByCategory(categoryIds, onlyAvailable);
+    return BEANS.get(ICategoryRepository.class).getById(id)
+      .orElseThrow(() -> new EntityNotFoundException("Category", id));
+  }
 
-    return categories.stream()
-      .map(category -> category.withItems(itemsByCategory.get(category.getCategoryId())))
-      .toList();
+  public CategoryDo create(CategoryDo category) {
+    // Permission check required
+    validateRequiredProperties(category);
+
+    return BEANS.get(ICategoryRepository.class).create(category);
+  }
+
+  public CategoryDo update(UUID id, CategoryDo category) {
+    // Permission check required
+    validateRequiredProperties(category);
+    helper.get().validateSameId(id, category.categoryId());
+
+    int affectedRows = BEANS.get(ICategoryRepository.class).store(id, category);
+    if (affectedRows != 1) {
+      throw new EntityNotFoundException("Category", id);
+    }
+    return category;
+  }
+
+  public void delete(UUID id) {
+    // Check permissions
+
+    int affectedRows = BEANS.get(ICategoryRepository.class).delete(id);
+    if (affectedRows != 1) {
+      throw new EntityNotFoundException("Category", id);
+    }
+  }
+
+  protected void validateRequiredProperties(CategoryDo category) {
+    helper.get().validateRequiredProperty(category.categoryId());
+    helper.get().validateRequiredProperty(category.name());
   }
 }

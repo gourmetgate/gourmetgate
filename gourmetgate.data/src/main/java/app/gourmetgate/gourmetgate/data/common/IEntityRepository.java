@@ -21,7 +21,7 @@ public interface IEntityRepository<DO extends DoEntity> {
 
   DO create(DO dataObject);
 
-  void store(UUID id, DO dataObject);
+  int store(UUID id, DO dataObject);
 
   int delete(UUID id);
 }

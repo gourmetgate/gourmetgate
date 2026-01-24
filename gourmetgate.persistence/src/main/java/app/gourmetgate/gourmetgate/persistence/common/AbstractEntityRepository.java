@@ -3,7 +3,6 @@ package app.gourmetgate.gourmetgate.persistence.common;
 import app.gourmetgate.gourmetgate.data.common.IEntityRepository;
 import app.gourmetgate.gourmetgate.data.status.Status;
 import org.eclipse.scout.rt.dataobject.DoEntity;
-import org.eclipse.scout.rt.platform.exception.ProcessingException;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
@@ -53,21 +52,17 @@ public abstract class AbstractEntityRepository<TABLE extends Table<RECORD>, RECO
   }
 
   @Override
-  public void store(UUID id, DO dataObject) {
-    store(id, toNewRecord(dataObject));
+  public int store(UUID id, DO dataObject) {
+    return store(id, toNewRecord(dataObject));
   }
 
   @Override
-  public void store(UUID id, RECORD record) {
-    int affectedRows = jooq()
+  public int store(UUID id, RECORD record) {
+    return jooq()
       .update(getTable())
       .set(record)
       .where(getIdColumn().eq(id))
       .execute();
-
-    if (affectedRows < 1) {
-      throw new ProcessingException("No record found to be updated");
-    }
   }
 
   @Override

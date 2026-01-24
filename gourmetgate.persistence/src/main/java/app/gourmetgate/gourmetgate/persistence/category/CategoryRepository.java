@@ -1,6 +1,6 @@
 package app.gourmetgate.gourmetgate.persistence.category;
 
-import app.gourmetgate.gourmetgate.data.category.CategoryPersistenceDo;
+import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.category.ICategoryRepository;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
@@ -12,7 +12,7 @@ import org.jooq.Field;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-public class CategoryRepository extends AbstractEntityRepository<Category, CategoryRecord, CategoryPersistenceDo> implements ICategoryRepository {
+public class CategoryRepository extends AbstractEntityRepository<Category, CategoryRecord, CategoryDo> implements ICategoryRepository {
 
   @Override
   public Category getTable() {
@@ -35,19 +35,19 @@ public class CategoryRepository extends AbstractEntityRepository<Category, Categ
   }
 
   @Override
-  protected CategoryRecord toNewRecord(CategoryPersistenceDo sourceDo) {
+  protected CategoryRecord toNewRecord(CategoryDo sourceDo) {
     return fromDoToRecord(sourceDo, new CategoryRecord());
   }
 
   @Override
-  protected CategoryPersistenceDo toNewDo(CategoryRecord sourceRecord) {
-    return fromRecordToDo(sourceRecord, BEANS.get(CategoryPersistenceDo.class));
+  protected CategoryDo toNewDo(CategoryRecord sourceRecord) {
+    return fromRecordToDo(sourceRecord, BEANS.get(CategoryDo.class));
   }
 
   @Override
-  protected DoEntityBeanMappings<CategoryPersistenceDo, CategoryRecord> mappings() {
-    return new DoEntityBeanMappings<CategoryPersistenceDo, CategoryRecord>()
-      .with(CategoryPersistenceDo::categoryId, CategoryRecord::getCategoryId, CategoryRecord::setCategoryId)
-      .with(CategoryPersistenceDo::name, CategoryRecord::getName, CategoryRecord::setName);
+  protected DoEntityBeanMappings<CategoryDo, CategoryRecord> mappings() {
+    return new DoEntityBeanMappings<CategoryDo, CategoryRecord>()
+      .with(CategoryDo::categoryId, CategoryRecord::getCategoryId, CategoryRecord::setCategoryId)
+      .with(CategoryDo::name, CategoryRecord::getName, CategoryRecord::setName);
   }
 }

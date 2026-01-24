@@ -1,14 +1,10 @@
 package app.gourmetgate.gourmetgate.data.category;
 
-import app.gourmetgate.gourmetgate.data.item.ItemDo;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
-import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @TypeName("gourmetgate.Category")
@@ -20,10 +16,6 @@ public class CategoryDo extends DoEntity {
 
   public DoValue<String> name() {
     return doValue("name");
-  }
-
-  public DoList<ItemDo> items() {
-    return doList("items");
   }
 
   /* **************************************************************************
@@ -50,22 +42,5 @@ public class CategoryDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public String getName() {
     return name().get();
-  }
-
-  @Generated("DoConvenienceMethodsGenerator")
-  public CategoryDo withItems(Collection<? extends ItemDo> items) {
-    items().updateAll(items);
-    return this;
-  }
-
-  @Generated("DoConvenienceMethodsGenerator")
-  public CategoryDo withItems(ItemDo... items) {
-    items().updateAll(items);
-    return this;
-  }
-
-  @Generated("DoConvenienceMethodsGenerator")
-  public List<ItemDo> getItems() {
-    return items().get();
   }
 }

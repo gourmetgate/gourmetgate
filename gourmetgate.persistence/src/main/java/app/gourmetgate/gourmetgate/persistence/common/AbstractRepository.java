@@ -55,15 +55,15 @@ public abstract class AbstractRepository<TABLE extends Table<RECORD>, RECORD ext
   }
 
   @Override
-  public void store(UUID id, RECORD record) {
+  public int store(UUID id, RECORD record) {
     if (exists(id)) {
-      jooq()
+      return jooq()
         .update(getTable())
         .set(record)
         .where(getIdColumn().eq(id))
         .execute();
     } else {
-      jooq()
+      return jooq()
         .insertInto(getTable())
         .set(record)
         .execute();

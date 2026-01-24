@@ -44,7 +44,7 @@ public interface IBaseRepository<TABLE extends Table<RECORD>, RECORD extends Rec
    * Persists the provided record based on the id specified. If no record with this id exists, a new record is created.
    * Otherwise the existing record is updated.
    */
-  void store(UUID id, RECORD record);
+  int store(UUID id, RECORD record);
 
   /**
    * Deletes the record with the specified id

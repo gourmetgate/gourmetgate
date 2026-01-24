@@ -1,47 +1,34 @@
-import {ajax, AjaxError, BaseDoEntity, ObjectWithType, scout} from '@eclipse-scout/core';
-import {AbstractItemResponse} from '../index';
+import {ajax, AjaxError, BaseDoEntity, ObjectWithType, systems} from '@eclipse-scout/core';
 
-export abstract class AbstractRestClient implements ObjectWithType {
+export abstract class AbstractRestClient<TItem extends BaseDoEntity, TItemResponse extends BaseDoEntity> implements ObjectWithType {
 
   objectType: string;
-  dataType: string;
   targetUrl: string;
 
-  protected constructor(dataType: string, targetUrl: string) {
-    this.dataType = dataType;
-    this.targetUrl = targetUrl;
+  protected constructor(targetEndpoint: string) {
+    this.targetUrl = systems.getOrCreate().getEndpointUrl(targetEndpoint, targetEndpoint) + '/';
   }
 
-  protected _loadItem<TItem extends BaseDoEntity>(id: string): JQuery.Promise<TItem, AjaxError> {
-    return ajax.getDataObject(this.targetUrl + id)
-      .then((res: AbstractItemResponse<TItem>) => res.items[0]);
+  public getAll(): JQuery.Promise<TItem[], AjaxError> {
+    return ajax.getDataObject(this.targetUrl)
+      .then(r => this._mapListResponse(r));
   }
 
-  protected _listItems<TItem extends BaseDoEntity>(restriction: BaseDoEntity): JQuery.Promise<TItem[], AjaxError> {
-    return ajax.postDataObject(this.targetUrl + 'list', restriction)
-      .then((res: AbstractItemResponse<TItem>) => res.items);
+  public getById(id: string): JQuery.Promise<TItem, AjaxError> {
+    return ajax.getDataObject(this.targetUrl + id);
   }
 
-  protected _createItem<TItem extends BaseDoEntity>(data: BaseDoEntity): JQuery.Promise<TItem, AjaxError> {
-    return ajax.postDataObject(this.targetUrl, data)
-      .then((res: AbstractItemResponse<TItem>) => this._triggerDataChange(res.items[0]));
+  public create(data: BaseDoEntity): JQuery.Promise<TItem, AjaxError> {
+    return ajax.postDataObject(this.targetUrl, data);
   }
 
-  protected _storeItem<TItem extends BaseDoEntity>(id: string, data: BaseDoEntity): JQuery.Promise<TItem, AjaxError> {
-    return ajax.putDataObject(this.targetUrl + id, data)
-      .then((res: AbstractItemResponse<TItem>) => this._triggerDataChange(res.items[0]));
+  public store(id: string, data: BaseDoEntity): JQuery.Promise<TItem, AjaxError> {
+    return ajax.putDataObject(this.targetUrl + id, data);
   }
 
-  protected _removeItem(id: string): JQuery.Promise<void, AjaxError> {
-    return ajax.removeDataObject(this.targetUrl + id)
-      .then(() => this._triggerDataChange());
+  public remove(id: string): JQuery.Promise<void, AjaxError> {
+    return ajax.removeDataObject(this.targetUrl + id);
   }
 
-  protected _triggerDataChange<TData>(data?: TData): TData {
-    scout.getSession().desktop.dataChange({
-      dataType: this.dataType,
-      data
-    });
-    return data;
-  }
+  protected abstract _mapListResponse(response: TItemResponse): TItem[];
 }
