@@ -1,10 +1,17 @@
-import {ObjectOrModel, PageWithTable, scout, TreeNodeModel} from "@eclipse-scout/core";
+import {ObjectOrModel, scout, TreeNodeModel} from "@eclipse-scout/core";
 import ItemTablePageModel, {ItemTable} from './ItemTablePageModel';
-import {CategoryDo, ItemDo, QueryResponseDo, QueryRestClient, TableRowWithEntity, VatDo} from "../../index";
+import {
+  AdminTablePage,
+  CategoryDo,
+  CategoryRestClient,
+  ItemDo,
+  QueryResponseDo,
+  QueryRestClient,
+  TableRowWithEntity,
+  VatDo
+} from "../../index";
 
-export class ItemTablePage extends PageWithTable {
-
-
+export class ItemTablePage extends AdminTablePage {
   declare detailTable: ItemTable;
 
   protected override _jsonModel(): TreeNodeModel {
@@ -41,5 +48,9 @@ export class ItemTablePage extends PageWithTable {
         vat.percentage
       ]
     }
+  }
+
+  protected _listeningDataTypes(): string[] {
+    return [CategoryRestClient.DATA_TYPE];
   }
 }

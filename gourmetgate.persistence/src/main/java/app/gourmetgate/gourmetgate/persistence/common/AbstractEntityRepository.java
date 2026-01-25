@@ -47,13 +47,20 @@ public abstract class AbstractEntityRepository<TABLE extends Table<RECORD>, RECO
     fromDoToRecord(dataObject, newRecord);
     newRecord.set(getIdColumn(), newId);
 
-    store(newId, newRecord);
+    create(newRecord);
     return fromRecordToDo(newRecord, dataObject);
   }
 
   @Override
   public int store(UUID id, DO dataObject) {
     return store(id, toNewRecord(dataObject));
+  }
+
+  public void create(RECORD record) {
+    jooq()
+      .insertInto(getTable())
+      .set(record)
+      .execute();
   }
 
   @Override

@@ -11,9 +11,9 @@ import java.time.Instant;
 public class OrderableEntityWithStatus implements ISchemaEntity {
 
   @CreationTimestamp
-  @Column(nullable = false)
+  @Column(columnDefinition = "TIMESTAMPTZ NOT NULL DEFAULT NOW()")
   public Instant sortCode;
 
-  @Column(nullable = false)
+  @Column(columnDefinition = "varchar(80) NOT NULL DEFAULT 'ACTIVE'")
   public String status = Status.ACTIVE.id;
 }

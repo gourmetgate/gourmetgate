@@ -21,11 +21,14 @@ export * from './rest/QueryRestClient';
 export * from './common/TableRowWithEntity';
 export * from './common/CurrencyColumn';
 export * from './common/PercentageColumn';
+export * from './common/MessageBoxHelper';
 
 export * from './admin/AdminOutline';
+export * from './admin/AdminTablePage';
 export * from './admin/item/ItemTablePage';
 export * from './admin/category/CategoryRestClient';
 export * from './admin/category/CategoryTablePage';
+export * from './admin/category/CategoryForm';
 export * from './admin/vat/VatTablePage';
 export * from './rest/AbstractItemResponse';
 export * from './rest/AbstractPersonRestClient';

@@ -1,13 +1,33 @@
-import {ObjectOrModel, PageWithTable, scout, TreeNodeModel} from "@eclipse-scout/core";
+import {ObjectOrModel, scout, Table, TreeNodeModel} from "@eclipse-scout/core";
 import CategoryTablePageModel, {CategoryTable} from './CategoryTablePageModel';
-import {CategoryDo, CategoryRestClient, TableRowWithEntity} from "../../index";
+import {
+  AdminTablePage,
+  CategoryDo,
+  CategoryForm,
+  CategoryRestClient,
+  MessageBoxHelper,
+  TableRowWithEntity
+} from "../../index";
 
-export class CategoryTablePage extends PageWithTable {
+export class CategoryTablePage extends AdminTablePage {
 
   declare detailTable: CategoryTable;
 
   protected override _jsonModel(): TreeNodeModel {
     return CategoryTablePageModel();
+  }
+
+  protected override _initDetailTable(table: Table) {
+    super._initDetailTable(table);
+
+    let createCategoryMenu = this.detailTable.widget('CreateCategoryMenu');
+    createCategoryMenu.on('action', this._onCreateCategoryMenuAction.bind(this));
+
+    let editCategoryMenu = this.detailTable.widget('EditCategoryMenu');
+    editCategoryMenu.on('action', this._onEditCategoryMenuAction.bind(this));
+
+    let deleteCategoryMenu = this.detailTable.widget('DeleteCategoryMenu');
+    deleteCategoryMenu.on('action', this._onDeleteCategoryMenuAction.bind(this));
   }
 
   protected override _loadTableData(): JQuery.Promise<CategoryDo[]> {
@@ -28,5 +48,42 @@ export class CategoryTablePage extends PageWithTable {
         category.name
       ]
     }
+  }
+
+  protected _getSelectedCategory(): CategoryDo {
+    let selection = this.detailTable.selectedRow() as TableRowWithEntity;
+    return selection?.entity as CategoryDo;
+  }
+
+  protected _createCategoryForm(): CategoryForm {
+    return scout.create(CategoryForm, {
+      parent: this.outline
+    });
+  }
+
+  protected _onCreateCategoryMenuAction() {
+    let form = this._createCategoryForm();
+    let emptyCategory = scout.create(CategoryDo);
+    form.setData(emptyCategory);
+    form.open();
+  }
+
+  protected _onEditCategoryMenuAction() {
+    let form = this._createCategoryForm();
+    form.setData(this._getSelectedCategory());
+    form.open();
+  }
+
+  protected _onDeleteCategoryMenuAction() {
+    scout.create(MessageBoxHelper).createDeleteConfirmationMessageBox(this.session)
+      .then(yes => {
+        if (yes) {
+          scout.create(CategoryRestClient).remove(this._getSelectedCategory().categoryId);
+        }
+      });
+  }
+
+  protected _listeningDataTypes(): string[] {
+    return [CategoryRestClient.DATA_TYPE];
   }
 }

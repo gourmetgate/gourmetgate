@@ -30,14 +30,15 @@ public class CategoryService implements IService {
 
   public CategoryDo create(CategoryDo category) {
     // Permission check required
-    validateRequiredProperties(category);
+    helper.get().validateRequiredProperty(category.name());
 
     return BEANS.get(ICategoryRepository.class).create(category);
   }
 
   public CategoryDo update(UUID id, CategoryDo category) {
     // Permission check required
-    validateRequiredProperties(category);
+    helper.get().validateRequiredProperty(category.categoryId());
+    helper.get().validateRequiredProperty(category.name());
     helper.get().validateSameId(id, category.categoryId());
 
     int affectedRows = BEANS.get(ICategoryRepository.class).store(id, category);
@@ -54,10 +55,5 @@ public class CategoryService implements IService {
     if (affectedRows != 1) {
       throw new EntityNotFoundException("Category", id);
     }
-  }
-
-  protected void validateRequiredProperties(CategoryDo category) {
-    helper.get().validateRequiredProperty(category.categoryId());
-    helper.get().validateRequiredProperty(category.name());
   }
 }
