@@ -4,6 +4,7 @@ import app.gourmetgate.gourmetgate.core.common.DoHelper;
 import app.gourmetgate.gourmetgate.core.common.EntityNotFoundException;
 import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.category.ICategoryRepository;
+import app.gourmetgate.gourmetgate.data.item.IItemRepository;
 import app.gourmetgate.gourmetgate.data.query.CategoryRestrictionDo;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
@@ -48,8 +49,12 @@ public class CategoryService implements IService {
     return category;
   }
 
-  public void delete(UUID id) {
+  public void delete(UUID id, UUID replacement) {
     // Check permissions
+    helper.get().validateReplacementId(id, replacement);
+
+    // Replace category
+    BEANS.get(IItemRepository.class).replaceCategory(id, replacement);
 
     int affectedRows = BEANS.get(ICategoryRepository.class).delete(id);
     if (affectedRows != 1) {

@@ -4,8 +4,9 @@ import {
   AdminTablePage,
   CategoryDo,
   CategoryForm,
+  CategoryLookupCall,
   CategoryRestClient,
-  MessageBoxHelper,
+  ReplacementChooserForm,
   TableRowWithEntity
 } from "../../index";
 
@@ -75,12 +76,19 @@ export class CategoryTablePage extends AdminTablePage {
   }
 
   protected _onDeleteCategoryMenuAction() {
-    scout.create(MessageBoxHelper).createDeleteConfirmationMessageBox(this.session)
-      .then(yes => {
-        if (yes) {
-          scout.create(CategoryRestClient).remove(this._getSelectedCategory().categoryId);
-        }
-      });
+    let selectedCategory = this._getSelectedCategory();
+    let form = scout.create(ReplacementChooserForm, {
+      parent: this.parent,
+      title: this.session.text('DeleteX', selectedCategory.name),
+      prompt: this.session.text('ChooseReplacementForX', selectedCategory.name),
+      replacementLookupCall: {
+        objectType: CategoryLookupCall,
+        filteredId: selectedCategory.categoryId
+      }
+    });
+    form.one('save', () => scout.create(CategoryRestClient)
+      .remove(selectedCategory.categoryId, form.widget('ReplacementField').value));
+    form.open();
   }
 
   protected _listeningDataTypes(): string[] {

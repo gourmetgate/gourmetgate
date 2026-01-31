@@ -50,8 +50,9 @@ public class CategoryResource implements IRestResource {
 
   @DELETE
   @Path("/{id}")
-  public void delete(@PathParam("id") String id) {
+  public void delete(@PathParam("id") String id, @QueryParam("replacementId") String replacementId) {
     UUID uuid = BEANS.get(DoHelper.class).ensureUuid(id);
-    BEANS.get(CategoryService.class).delete(uuid);
+    UUID replacement = BEANS.get(DoHelper.class).ensureUuid(replacementId);
+    BEANS.get(CategoryService.class).delete(uuid, replacement);
   }
 }

@@ -12,4 +12,6 @@ public interface IItemRepository extends IEntityRepository<ItemPersistenceDo> {
   Stream<ItemPersistenceDo> list(ItemRestrictionDo restriction);
 
   Stream<ItemPersistenceDo> getItemsByCategory(List<UUID> categoryIds, boolean availableOnly);
+
+  void replaceCategory(UUID oldId, UUID replacementId);
 }

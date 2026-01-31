@@ -53,4 +53,12 @@ public class DoHelper {
       throw new DataValidationException(error);
     }
   }
+
+  public void validateReplacementId(UUID deleted, UUID replacement) {
+    boolean idEquals = deleted.equals(replacement);
+    if (idEquals) {
+      String error = String.format("Not allowed to replace old id with same id. Old: %s, new: %s", deleted, replacement);
+      throw new DataValidationException(error);
+    }
+  }
 }

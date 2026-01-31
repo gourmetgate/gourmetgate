@@ -32,7 +32,7 @@ export abstract class AbstractRestClient<TItem extends BaseDoEntity, TItemRespon
       .then(r => this._triggerDataChange(r));
   }
 
-  public remove(id: string): JQuery.Promise<void, AjaxError> {
+  public remove(id: string, replacement?: string): JQuery.Promise<void, AjaxError> {
     return ajax.removeDataObject(this.targetUrl + id)
       .then(() => this._triggerDataChange());
   }
