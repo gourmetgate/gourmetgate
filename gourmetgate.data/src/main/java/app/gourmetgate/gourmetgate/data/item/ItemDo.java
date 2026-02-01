@@ -1,6 +1,5 @@
 package app.gourmetgate.gourmetgate.data.item;
 
-import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
@@ -20,8 +19,8 @@ public class ItemDo extends DoEntity {
     return doValue("categoryId");
   }
 
-  public DoValue<VatDo> vat() {
-    return doValue("vat");
+  public DoValue<UUID> vatId() {
+    return doValue("vatId");
   }
 
   public DoValue<String> name() {
@@ -39,8 +38,6 @@ public class ItemDo extends DoEntity {
   public DoValue<Boolean> available() {
     return doValue("available");
   }
-
-  // Variants missing
 
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
@@ -69,14 +66,14 @@ public class ItemDo extends DoEntity {
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public ItemDo withVat(VatDo vat) {
-    vat().set(vat);
+  public ItemDo withVatId(UUID vatId) {
+    vatId().set(vatId);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public VatDo getVat() {
-    return vat().get();
+  public UUID getVatId() {
+    return vatId().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

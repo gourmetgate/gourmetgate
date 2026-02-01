@@ -1,8 +1,9 @@
 package app.gourmetgate.gourmetgate.persistence.item;
 
 import app.gourmetgate.gourmetgate.data.item.IItemRepository;
-import app.gourmetgate.gourmetgate.data.item.ItemPersistenceDo;
+import app.gourmetgate.gourmetgate.data.item.ItemDo;
 import app.gourmetgate.gourmetgate.data.query.ItemRestrictionDo;
+import app.gourmetgate.gourmetgate.data.status.Status;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import app.gourmetgate.gourmetgate.persistence.tables.Item;
@@ -11,14 +12,13 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.jooq.Field;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
 import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
 import static org.jooq.impl.DSL.noCondition;
 
-public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, ItemPersistenceDo> implements IItemRepository {
+public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, ItemDo> implements IItemRepository {
 
   @Override
   public Item getTable() {
@@ -41,24 +41,14 @@ public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, I
   }
 
   @Override
-  public Stream<ItemPersistenceDo> list(ItemRestrictionDo restriction) {
+  public Stream<ItemDo> list(ItemRestrictionDo restriction) {
     return jooq()
       .selectFrom(getTable())
       .where(
         restriction.categories().exists() ? getTable().CATEGORY_ID.in(restriction.getCategories()) : noCondition(),
-        restriction.available().exists() ? getTable().AVAILABLE.eq(restriction.isAvailable()) : noCondition()
+        restriction.available().exists() ? getTable().AVAILABLE.eq(restriction.isAvailable()) : noCondition(),
+        getTable().STATUS.eq(Status.ACTIVE.id)
       )
-      .fetchStream()
-      .map(this::toNewDo);
-  }
-
-  @Override
-  public Stream<ItemPersistenceDo> getItemsByCategory(List<UUID> categoryIds, boolean availableOnly) {
-    return jooq()
-      .selectFrom(getTable())
-      .where(
-        getTable().CATEGORY_ID.in(categoryIds),
-        availableOnly ? getTable().AVAILABLE.eq(true) : noCondition())
       .fetchStream()
       .map(this::toNewDo);
   }
@@ -73,24 +63,24 @@ public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, I
   }
 
   @Override
-  protected ItemRecord toNewRecord(ItemPersistenceDo sourceDo) {
+  protected ItemRecord toNewRecord(ItemDo sourceDo) {
     return fromDoToRecord(sourceDo, new ItemRecord());
   }
 
   @Override
-  protected ItemPersistenceDo toNewDo(ItemRecord sourceRecord) {
-    return fromRecordToDo(sourceRecord, BEANS.get(ItemPersistenceDo.class));
+  protected ItemDo toNewDo(ItemRecord sourceRecord) {
+    return fromRecordToDo(sourceRecord, BEANS.get(ItemDo.class));
   }
 
   @Override
-  protected DoEntityBeanMappings<ItemPersistenceDo, ItemRecord> mappings() {
-    return new DoEntityBeanMappings<ItemPersistenceDo, ItemRecord>()
-      .with(ItemPersistenceDo::itemId, ItemRecord::getItemId, ItemRecord::setItemId)
-      .with(ItemPersistenceDo::categoryId, ItemRecord::getCategoryId, ItemRecord::setCategoryId)
-      .with(ItemPersistenceDo::vatId, ItemRecord::getVatId, ItemRecord::setVatId)
-      .with(ItemPersistenceDo::name, ItemRecord::getName, ItemRecord::setName)
-      .with(ItemPersistenceDo::price, ItemRecord::getPrice, ItemRecord::setPrice)
-      .with(ItemPersistenceDo::cost, ItemRecord::getCost, ItemRecord::setCost)
-      .with(ItemPersistenceDo::available, ItemRecord::getAvailable, ItemRecord::setAvailable);
+  protected DoEntityBeanMappings<ItemDo, ItemRecord> mappings() {
+    return new DoEntityBeanMappings<ItemDo, ItemRecord>()
+      .with(ItemDo::itemId, ItemRecord::getItemId, ItemRecord::setItemId)
+      .with(ItemDo::categoryId, ItemRecord::getCategoryId, ItemRecord::setCategoryId)
+      .with(ItemDo::vatId, ItemRecord::getVatId, ItemRecord::setVatId)
+      .with(ItemDo::name, ItemRecord::getName, ItemRecord::setName)
+      .with(ItemDo::price, ItemRecord::getPrice, ItemRecord::setPrice)
+      .with(ItemDo::cost, ItemRecord::getCost, ItemRecord::setCost)
+      .with(ItemDo::available, ItemRecord::getAvailable, ItemRecord::setAvailable);
   }
 }

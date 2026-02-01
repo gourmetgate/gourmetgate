@@ -1,4 +1,4 @@
-import {BooleanColumn, Column, PageWithTable, PageWithTableModel, Table} from '@eclipse-scout/core';
+import {BooleanColumn, Column, icons, Menu, PageWithTable, PageWithTableModel, Table} from '@eclipse-scout/core';
 import {CurrencyColumn, PercentageColumn} from '../../index';
 
 export default (): PageWithTableModel => ({
@@ -57,6 +57,29 @@ export default (): PageWithTableModel => ({
         text: '${textKey:Vat}',
         width: 200
       }
+    ],
+    menus: [
+      {
+        id: 'CreateItemMenu',
+        objectType: Menu,
+        text: '${textKey:CreateItem}',
+        iconId: icons.PLUS,
+        menuTypes: [Table.MenuType.EmptySpace]
+      },
+      {
+        id: 'EditItemMenu',
+        objectType: Menu,
+        text: '${textKey:EditItem}',
+        iconId: icons.PENCIL,
+        menuTypes: [Table.MenuType.SingleSelection]
+      },
+      {
+        id: 'DeleteItemMenu',
+        objectType: Menu,
+        text: '${textKey:DeleteItem}',
+        iconId: icons.REMOVE,
+        menuTypes: [Table.MenuType.SingleSelection]
+      }
     ]
   }
 });
@@ -66,8 +89,15 @@ export default (): PageWithTableModel => ({
 * **************************************************************************/
 
 export class ItemTable extends Table {
+  declare widgetMap: ItemTableWidgetMap;
   declare columnMap: ItemTableColumnMap;
 }
+
+export type ItemTableWidgetMap = {
+  'CreateItemMenu': Menu;
+  'EditItemMenu': Menu;
+  'DeleteItemMenu': Menu;
+};
 
 export type ItemTableColumnMap = {
   'IdColumn': Column;

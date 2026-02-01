@@ -1,30 +1,13 @@
 package app.gourmetgate.gourmetgate.core.common;
 
-import org.eclipse.scout.rt.dataobject.DataObjectHelper;
-import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoNode;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
-import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.util.LazyValue;
 import org.eclipse.scout.rt.platform.util.StringUtility;
 
 import java.util.UUID;
-import java.util.function.Function;
 
 @ApplicationScoped
 public class DoHelper {
-
-  protected LazyValue<DataObjectHelper> helper = new LazyValue<>(DataObjectHelper.class);
-
-  public <T extends DoEntity> T autoMap(Class<? extends T> targetClass, DoEntity source) {
-    T targetDo = BEANS.get(targetClass);
-    return helper.get().applyValues(targetDo, source);
-  }
-
-  public <T extends DoEntity> void deleteNode(DoEntity entity, Class<T> doClass, Function<T, DoNode<?>> nodeGetter) {
-    String attributeName = nodeGetter.apply(BEANS.get(doClass)).getAttributeName();
-    entity.remove(attributeName);
-  }
 
   public UUID ensureUuid(String id) {
     try {

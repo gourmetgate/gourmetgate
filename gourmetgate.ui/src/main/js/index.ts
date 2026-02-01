@@ -11,6 +11,7 @@ export * from './data/CategoryDo';
 export * from './data/CategoryResponseDo';
 export * from './data/CategoryRestrictionDo';
 export * from './data/ItemRestrictionDo';
+export * from './data/ItemResponseDo';
 export * from './data/VatRestrictionDo';
 export * from './data/QueryRestrictionDo';
 export * from './data/QueryResponseDo';
@@ -28,7 +29,10 @@ export * from './common/ReplacementChooserForm';
 
 export * from './admin/AdminOutline';
 export * from './admin/AdminTablePage';
+export * from './admin/item/ItemRestClient';
 export * from './admin/item/ItemTablePage';
+export * from './admin/item/ItemLookupCall';
+export * from './admin/item/ItemForm';
 export * from './admin/category/CategoryRestClient';
 export * from './admin/category/CategoryTablePage';
 export * from './admin/category/CategoryForm';

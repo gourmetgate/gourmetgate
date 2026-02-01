@@ -1,10 +1,13 @@
-import {ObjectOrModel, scout, TreeNodeModel} from "@eclipse-scout/core";
+import {ObjectOrModel, scout, Table, TreeNodeModel} from "@eclipse-scout/core";
 import ItemTablePageModel, {ItemTable} from './ItemTablePageModel';
 import {
   AdminTablePage,
   CategoryDo,
   CategoryRestClient,
   ItemDo,
+  ItemForm,
+  ItemRestClient,
+  MessageBoxHelper,
   QueryResponseDo,
   QueryRestClient,
   TableRowWithEntity,
@@ -16,6 +19,19 @@ export class ItemTablePage extends AdminTablePage {
 
   protected override _jsonModel(): TreeNodeModel {
     return ItemTablePageModel();
+  }
+
+  protected override _initDetailTable(table: Table) {
+    super._initDetailTable(table);
+
+    let createItemMenu = this.detailTable.widget('CreateItemMenu');
+    createItemMenu.on('action', this._onCreateItemMenuAction.bind(this));
+
+    let editItemMenu = this.detailTable.widget('EditItemMenu');
+    editItemMenu.on('action', this._onEditItemMenuAction.bind(this));
+
+    let deleteItemMenu = this.detailTable.widget('DeleteItemMenu');
+    deleteItemMenu.on('action', this._onDeleteItemMenuAction.bind(this));
   }
 
   protected override _loadTableData(): JQuery.Promise<QueryResponseDo> {
@@ -50,7 +66,40 @@ export class ItemTablePage extends AdminTablePage {
     }
   }
 
+  protected _getSelectedItem(): ItemDo {
+    let selection = this.detailTable.selectedRow() as TableRowWithEntity;
+    return selection?.entity as ItemDo;
+  }
+
+  protected _createItemForm(): ItemForm {
+    return scout.create(ItemForm, {
+      parent: this.outline
+    });
+  }
+
+  protected _onCreateItemMenuAction() {
+    let form = this._createItemForm();
+    let emptyItem = scout.create(ItemDo);
+    form.setData(emptyItem);
+    form.open();
+  }
+
+  protected _onEditItemMenuAction() {
+    let form = this._createItemForm();
+    form.setData(this._getSelectedItem());
+    form.open();
+  }
+
+  protected _onDeleteItemMenuAction() {
+    scout.create(MessageBoxHelper).createDeleteConfirmationMessageBox(this.session)
+      .then(yes => {
+        if (yes) {
+          scout.create(ItemRestClient).remove(this._getSelectedItem().itemId);
+        }
+      })
+  }
+
   protected _listeningDataTypes(): string[] {
-    return [CategoryRestClient.DATA_TYPE];
+    return [CategoryRestClient.DATA_TYPE, ItemRestClient.DATA_TYPE];
   }
 }
