@@ -11,4 +11,6 @@ public interface IItemRepository extends IEntityRepository<ItemDo> {
   Stream<ItemDo> list(ItemRestrictionDo restriction);
 
   void replaceCategory(UUID oldId, UUID replacementId);
+
+  void replaceVat(UUID oldId, UUID replacementId);
 }

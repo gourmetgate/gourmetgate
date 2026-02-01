@@ -1,6 +1,6 @@
 import {QueryLookupCall} from "../../index";
 
-export class ItemLookupCall extends QueryLookupCall {
+export class VatLookupCall extends QueryLookupCall {
 
   constructor() {
     super();

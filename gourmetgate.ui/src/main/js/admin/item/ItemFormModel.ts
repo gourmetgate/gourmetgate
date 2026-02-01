@@ -1,5 +1,5 @@
 import {CancelMenu, CheckBoxField, FormModel, GroupBox, OkMenu, SmartField, StringField} from '@eclipse-scout/core';
-import {CategoryLookupCall, ItemLookupCall} from "./../../index";
+import {CategoryLookupCall, VatLookupCall} from "./../../index";
 
 export default (): FormModel => ({
   displayHint: 'dialog',
@@ -31,7 +31,7 @@ export default (): FormModel => ({
             id: 'VatField',
             objectType: SmartField<string>,
             label: '${textKey:Vat}',
-            lookupCall: ItemLookupCall,
+            lookupCall: VatLookupCall,
             mandatory: true
           },
           {

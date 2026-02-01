@@ -63,6 +63,15 @@ public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, I
   }
 
   @Override
+  public void replaceVat(UUID oldId, UUID replacementId) {
+    jooq()
+      .update(getTable())
+      .set(getTable().VAT_ID, replacementId)
+      .where(getTable().VAT_ID.eq(oldId))
+      .execute();
+  }
+
+  @Override
   protected ItemRecord toNewRecord(ItemDo sourceDo) {
     return fromDoToRecord(sourceDo, new ItemRecord());
   }

@@ -11,7 +11,8 @@ import {
   QueryResponseDo,
   QueryRestClient,
   TableRowWithEntity,
-  VatDo
+  VatDo,
+  VatRestClient
 } from "../../index";
 
 export class ItemTablePage extends AdminTablePage {
@@ -100,6 +101,6 @@ export class ItemTablePage extends AdminTablePage {
   }
 
   protected _listeningDataTypes(): string[] {
-    return [CategoryRestClient.DATA_TYPE, ItemRestClient.DATA_TYPE];
+    return [CategoryRestClient.DATA_TYPE, ItemRestClient.DATA_TYPE, VatRestClient.DATA_TYPE];
   }
 }
