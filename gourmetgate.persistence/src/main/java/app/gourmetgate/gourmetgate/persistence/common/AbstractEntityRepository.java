@@ -3,6 +3,7 @@ package app.gourmetgate.gourmetgate.persistence.common;
 import app.gourmetgate.gourmetgate.data.common.IEntityRepository;
 import app.gourmetgate.gourmetgate.data.status.Status;
 import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
@@ -13,6 +14,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.lower;
 
 public abstract class AbstractEntityRepository<TABLE extends Table<RECORD>, RECORD extends Record, DO extends DoEntity> extends AbstractRepository<TABLE, RECORD, DO> implements IEntityRepository<DO> {
 
@@ -84,4 +86,11 @@ public abstract class AbstractEntityRepository<TABLE extends Table<RECORD>, RECO
   protected abstract RECORD toNewRecord(DO sourceDo);
 
   protected abstract DO toNewDo(RECORD sourceRecord);
+
+  // HELPER Methods
+
+  protected Condition getTextMatchingCondition(Field<String> textColumn, String text) {
+    String textWithWildcards = "%" + text + "%";
+    return lower(textColumn).like(lower(textWithWildcards));
+  }
 }

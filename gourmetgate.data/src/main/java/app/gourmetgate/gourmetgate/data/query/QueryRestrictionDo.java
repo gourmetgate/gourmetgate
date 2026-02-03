@@ -16,6 +16,10 @@ public class QueryRestrictionDo extends DoEntity {
     return doValue("itemRestriction");
   }
 
+  public DoValue<VariantRestrictionDo> variantRestriction() {
+    return doValue("variantRestriction");
+  }
+
   public DoValue<VatRestrictionDo> vatRestriction() {
     return doValue("vatRestriction");
   }
@@ -44,6 +48,17 @@ public class QueryRestrictionDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public ItemRestrictionDo getItemRestriction() {
     return itemRestriction().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public QueryRestrictionDo withVariantRestriction(VariantRestrictionDo variantRestriction) {
+    variantRestriction().set(variantRestriction);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public VariantRestrictionDo getVariantRestriction() {
+    return variantRestriction().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

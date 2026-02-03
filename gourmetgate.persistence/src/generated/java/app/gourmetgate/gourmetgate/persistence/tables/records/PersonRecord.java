@@ -62,8 +62,8 @@ public class PersonRecord extends UpdatableRecordImpl<PersonRecord> {
   }
 
   /**
-     * Setter for <code>public.person.first_name</code>.
-   */
+   * Setter for <code>public.person.first_name</code>.
+     */
   public void setFirstName(String value) {
     set(3, value);
   }

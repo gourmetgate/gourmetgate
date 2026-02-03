@@ -2,10 +2,13 @@ package app.gourmetgate.gourmetgate.data.item;
 
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
+import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @TypeName("gourmetgate.Item")
@@ -37,6 +40,10 @@ public class ItemDo extends DoEntity {
 
   public DoValue<Boolean> available() {
     return doValue("available");
+  }
+
+  public DoList<UUID> variantIds() {
+    return doList("variantIds");
   }
 
   /* **************************************************************************
@@ -123,5 +130,22 @@ public class ItemDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public boolean isAvailable() {
     return nvl(getAvailable());
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public ItemDo withVariantIds(Collection<? extends UUID> variantIds) {
+    variantIds().updateAll(variantIds);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public ItemDo withVariantIds(UUID... variantIds) {
+    variantIds().updateAll(variantIds);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public List<UUID> getVariantIds() {
+    return variantIds().get();
   }
 }

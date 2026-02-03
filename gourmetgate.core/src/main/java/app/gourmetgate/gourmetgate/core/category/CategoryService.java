@@ -18,7 +18,7 @@ public class CategoryService implements IService {
   protected LazyValue<DoHelper> helper = new LazyValue<>(DoHelper.class);
 
   public List<CategoryDo> list(CategoryRestrictionDo restriction) {
-    return BEANS.get(ICategoryRepository.class).getAllActive()
+    return BEANS.get(ICategoryRepository.class).list(restriction)
       .toList();
   }
 

@@ -2,6 +2,8 @@ package app.gourmetgate.gourmetgate.persistence.category;
 
 import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.category.ICategoryRepository;
+import app.gourmetgate.gourmetgate.data.query.CategoryRestrictionDo;
+import app.gourmetgate.gourmetgate.data.status.Status;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
 import app.gourmetgate.gourmetgate.persistence.tables.Category;
@@ -11,6 +13,10 @@ import org.jooq.Field;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
+import java.util.stream.Stream;
+
+import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.noCondition;
 
 public class CategoryRepository extends AbstractEntityRepository<Category, CategoryRecord, CategoryDo> implements ICategoryRepository {
 
@@ -32,6 +38,18 @@ public class CategoryRepository extends AbstractEntityRepository<Category, Categ
   @Override
   public Field<String> getStatusColumn() {
     return getTable().STATUS;
+  }
+
+  @Override
+  public Stream<CategoryDo> list(CategoryRestrictionDo restriction) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(
+        getStatusColumn().eq(Status.ACTIVE.id),
+        restriction.categoryId().exists() ? getIdColumn().eq(restriction.getCategoryId()) : noCondition(),
+        restriction.name().exists() ? getTextMatchingCondition(getTable().NAME, restriction.getName()) : noCondition()
+      ).fetchStream()
+      .map(this::toNewDo);
   }
 
   @Override
