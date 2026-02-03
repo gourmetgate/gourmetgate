@@ -1,5 +1,7 @@
 package app.gourmetgate.gourmetgate.persistence.vat;
 
+import app.gourmetgate.gourmetgate.data.query.VatRestrictionDo;
+import app.gourmetgate.gourmetgate.data.status.Status;
 import app.gourmetgate.gourmetgate.data.vat.IVatRepository;
 import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
@@ -11,6 +13,10 @@ import org.jooq.Field;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
+import java.util.stream.Stream;
+
+import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.noCondition;
 
 public class VatRepository extends AbstractEntityRepository<Vat, VatRecord, VatDo> implements IVatRepository {
 
@@ -32,6 +38,17 @@ public class VatRepository extends AbstractEntityRepository<Vat, VatRecord, VatD
   @Override
   public Field<String> getStatusColumn() {
     return getTable().STATUS;
+  }
+
+  @Override
+  public Stream<VatDo> list(VatRestrictionDo restriction) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(
+        getStatusColumn().eq(Status.ACTIVE.id),
+        restriction.vatId().exists() ? getIdColumn().eq(restriction.getVatId()) : noCondition()
+      ).fetchStream()
+      .map(this::toNewDo);
   }
 
   @Override

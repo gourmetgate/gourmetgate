@@ -2,6 +2,7 @@ package app.gourmetgate.gourmetgate.data.query;
 
 import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.item.ItemDo;
+import app.gourmetgate.gourmetgate.data.variant.VariantDo;
 import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
@@ -20,6 +21,10 @@ public class QueryResponseDo extends DoEntity {
 
   public DoList<ItemDo> items() {
     return doList("items");
+  }
+
+  public DoList<VariantDo> variants() {
+    return doList("variants");
   }
 
   public DoList<VatDo> vat() {
@@ -62,6 +67,23 @@ public class QueryResponseDo extends DoEntity {
   @Generated("DoConvenienceMethodsGenerator")
   public List<ItemDo> getItems() {
     return items().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public QueryResponseDo withVariants(Collection<? extends VariantDo> variants) {
+    variants().updateAll(variants);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public QueryResponseDo withVariants(VariantDo... variants) {
+    variants().updateAll(variants);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public List<VariantDo> getVariants() {
+    return variants().get();
   }
 
   @Generated("DoConvenienceMethodsGenerator")

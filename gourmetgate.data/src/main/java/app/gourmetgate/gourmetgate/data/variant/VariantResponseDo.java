@@ -1,6 +1,5 @@
-package app.gourmetgate.gourmetgate.data;
+package app.gourmetgate.gourmetgate.data.variant;
 
-import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoList;
@@ -9,11 +8,11 @@ import org.eclipse.scout.rt.dataobject.TypeName;
 import java.util.Collection;
 import java.util.List;
 
-@TypeName("gourmetgate.VatResponse")
-public class VatResponseDo extends DoEntity {
+@TypeName("gourmetgate.VariantResponse")
+public class VariantResponseDo extends DoEntity {
 
-  public DoList<VatDo> vat() {
-    return doList("vat");
+  public DoList<VariantDo> variants() {
+    return doList("variants");
   }
 
   /* **************************************************************************
@@ -21,19 +20,19 @@ public class VatResponseDo extends DoEntity {
    * *************************************************************************/
 
   @Generated("DoConvenienceMethodsGenerator")
-  public VatResponseDo withVat(Collection<? extends VatDo> vat) {
-    vat().updateAll(vat);
+  public VariantResponseDo withVariants(Collection<? extends VariantDo> variants) {
+    variants().updateAll(variants);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public VatResponseDo withVat(VatDo... vat) {
-    vat().updateAll(vat);
+  public VariantResponseDo withVariants(VariantDo... variants) {
+    variants().updateAll(variants);
     return this;
   }
 
   @Generated("DoConvenienceMethodsGenerator")
-  public List<VatDo> getVat() {
-    return vat().get();
+  public List<VariantDo> getVariants() {
+    return variants().get();
   }
 }
