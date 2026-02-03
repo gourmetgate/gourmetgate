@@ -58,8 +58,8 @@ public class Person extends TableImpl<PersonRecord> {
   public final TableField<PersonRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(255), this, "");
 
   /**
-     * The column <code>public.person.last_name</code>.
-   */
+   * The column <code>public.person.last_name</code>.
+     */
   public final TableField<PersonRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(255), this, "");
 
   private Person(Name alias, Table<PersonRecord> aliased) {

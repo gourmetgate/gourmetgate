@@ -4,10 +4,7 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
-import app.gourmetgate.gourmetgate.persistence.tables.Category;
-import app.gourmetgate.gourmetgate.persistence.tables.Item;
-import app.gourmetgate.gourmetgate.persistence.tables.Person;
-import app.gourmetgate.gourmetgate.persistence.tables.Vat;
+import app.gourmetgate.gourmetgate.persistence.tables.*;
 
 
 /**
@@ -27,9 +24,24 @@ public class Tables {
   public static final Item ITEM = Item.ITEM;
 
   /**
+   * The table <code>public.item_to_variant</code>.
+   */
+  public static final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
+
+  /**
    * The table <code>public.person</code>.
    */
   public static final Person PERSON = Person.PERSON;
+
+  /**
+   * The table <code>public.variant</code>.
+   */
+  public static final Variant VARIANT = Variant.VARIANT;
+
+  /**
+   * The table <code>public.variant_option</code>.
+   */
+  public static final VariantOption VARIANT_OPTION = VariantOption.VARIANT_OPTION;
 
   /**
    * The table <code>public.vat</code>.
