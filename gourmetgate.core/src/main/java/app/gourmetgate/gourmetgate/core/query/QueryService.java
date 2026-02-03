@@ -2,6 +2,7 @@ package app.gourmetgate.gourmetgate.core.query;
 
 import app.gourmetgate.gourmetgate.core.category.CategoryService;
 import app.gourmetgate.gourmetgate.core.item.ItemService;
+import app.gourmetgate.gourmetgate.core.variant.VariantService;
 import app.gourmetgate.gourmetgate.core.vat.VatService;
 import app.gourmetgate.gourmetgate.data.query.QueryResponseDo;
 import app.gourmetgate.gourmetgate.data.query.QueryRestrictionDo;
@@ -19,6 +20,10 @@ public class QueryService implements IService {
 
     if (restriction.itemRestriction().exists()) {
       result.withItems(BEANS.get(ItemService.class).list(restriction.getItemRestriction()));
+    }
+
+    if (restriction.variantRestriction().exists()) {
+      result.withVariants(BEANS.get(VariantService.class).list(restriction.getVariantRestriction()));
     }
 
     if (restriction.vatRestriction().exists()) {

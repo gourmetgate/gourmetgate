@@ -57,8 +57,8 @@ public class VatRecord extends UpdatableRecordImpl<VatRecord> {
   }
 
   /**
-     * Getter for <code>public.vat.vat_id</code>.
-   */
+   * Getter for <code>public.vat.vat_id</code>.
+     */
   public UUID getVatId() {
     return (UUID) get(2);
   }

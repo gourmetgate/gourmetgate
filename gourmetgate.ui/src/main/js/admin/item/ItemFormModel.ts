@@ -1,5 +1,17 @@
-import {CancelMenu, CheckBoxField, FormModel, GroupBox, OkMenu, SmartField, StringField} from '@eclipse-scout/core';
+import {
+  CancelMenu,
+  CheckBoxField,
+  FormField,
+  FormModel,
+  GroupBox,
+  NumberField,
+  OkMenu,
+  SmartField,
+  StringField,
+  TreeBox
+} from '@eclipse-scout/core';
 import {CategoryLookupCall, VatLookupCall} from "./../../index";
+import {VariantLookupCall} from '../../index';
 
 export default (): FormModel => ({
   displayHint: 'dialog',
@@ -36,20 +48,35 @@ export default (): FormModel => ({
           },
           {
             id: 'PriceField',
-            objectType: StringField,
+            objectType: NumberField,
             label: '${textKey:Price}',
-            mandatory: true
+            mandatory: true,
+            gridDataHints: {
+              horizontalAlignment: -1
+            }
           },
           {
             id: 'CostField',
-            objectType: StringField,
-            label: '${textKey:Cost}'
+            objectType: NumberField,
+            label: '${textKey:Cost}',
+            gridDataHints: {
+              horizontalAlignment: -1
+            }
           },
           {
             id: 'AvailableField',
             objectType: CheckBoxField,
-            label: '${textKey:Available}',
-            mandatory: true
+            label: '${textKey:Available}'
+          },
+          {
+            id: 'AssignedVariantsField',
+            objectType: TreeBox,
+            label: '${textKey:Variants}',
+            labelPosition: FormField.LabelPosition.TOP,
+            lookupCall: VariantLookupCall,
+            gridDataHints: {
+              h: 4
+            }
           }
         ]
       }
@@ -79,9 +106,10 @@ export type ItemFormWidgetMap = {
   'NameField': StringField;
   'CategoryField': SmartField<string>;
   'VatField': SmartField<string>;
-  'PriceField': StringField;
-  'CostField': StringField;
+  'PriceField': NumberField;
+  'CostField': NumberField;
   'AvailableField': CheckBoxField;
+  'AssignedVariantsField': TreeBox<any>;
   'OkMenu': OkMenu;
   'CancelMenu': CancelMenu;
 };

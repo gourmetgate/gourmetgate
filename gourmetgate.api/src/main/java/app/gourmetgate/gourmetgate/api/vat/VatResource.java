@@ -2,7 +2,7 @@ package app.gourmetgate.gourmetgate.api.vat;
 
 import app.gourmetgate.gourmetgate.core.common.DoHelper;
 import app.gourmetgate.gourmetgate.core.vat.VatService;
-import app.gourmetgate.gourmetgate.data.VatResponseDo;
+import app.gourmetgate.gourmetgate.data.vat.VatResponseDo;
 import app.gourmetgate.gourmetgate.data.query.VatRestrictionDo;
 import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import jakarta.ws.rs.*;

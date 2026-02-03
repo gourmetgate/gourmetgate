@@ -45,9 +45,11 @@ public class ItemRepository extends AbstractEntityRepository<Item, ItemRecord, I
     return jooq()
       .selectFrom(getTable())
       .where(
+        getTable().STATUS.eq(Status.ACTIVE.id),
+        restriction.itemId().exists() ? getIdColumn().eq(restriction.getItemId()) : noCondition(),
+        restriction.name().exists() ? getTextMatchingCondition(getTable().NAME, restriction.getName()) : noCondition(),
         restriction.categories().exists() ? getTable().CATEGORY_ID.in(restriction.getCategories()) : noCondition(),
-        restriction.available().exists() ? getTable().AVAILABLE.eq(restriction.isAvailable()) : noCondition(),
-        getTable().STATUS.eq(Status.ACTIVE.id)
+        restriction.available().exists() ? getTable().AVAILABLE.eq(restriction.isAvailable()) : noCondition()
       )
       .fetchStream()
       .map(this::toNewDo);

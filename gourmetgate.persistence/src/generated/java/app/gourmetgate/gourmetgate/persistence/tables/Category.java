@@ -41,7 +41,7 @@ public class Category extends TableImpl<CategoryRecord> {
   /**
    * The column <code>public.category.sort_code</code>.
    */
-  public final TableField<CategoryRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
+  public final TableField<CategoryRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.TIMESTAMPWITHTIMEZONE)), this, "");
 
   /**
    * The column <code>public.category.category_id</code>.
@@ -56,7 +56,7 @@ public class Category extends TableImpl<CategoryRecord> {
   /**
    * The column <code>public.category.status</code>.
    */
-  public final TableField<CategoryRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+  public final TableField<CategoryRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field(DSL.raw("'ACTIVE'::character varying"), SQLDataType.VARCHAR)), this, "");
 
   private Category(Name alias, Table<CategoryRecord> aliased) {
     this(alias, aliased, (Field<?>[]) null, null);
