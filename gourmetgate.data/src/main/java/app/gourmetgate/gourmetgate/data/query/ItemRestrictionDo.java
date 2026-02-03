@@ -8,9 +8,18 @@ import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @TypeName("gourmetgate.ItemRestirction")
 public class ItemRestrictionDo extends DoEntity {
+
+  public DoValue<UUID> itemId() {
+    return doValue("itemId");
+  }
+
+  public DoValue<String> name() {
+    return doValue("name");
+  }
 
   public DoList<String> categories() {
     return doList("categories");
@@ -23,6 +32,28 @@ public class ItemRestrictionDo extends DoEntity {
   /* **************************************************************************
    * GENERATED CONVENIENCE METHODS
    * *************************************************************************/
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public ItemRestrictionDo withItemId(UUID itemId) {
+    itemId().set(itemId);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public UUID getItemId() {
+    return itemId().get();
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public ItemRestrictionDo withName(String name) {
+    name().set(name);
+    return this;
+  }
+
+  @Generated("DoConvenienceMethodsGenerator")
+  public String getName() {
+    return name().get();
+  }
 
   @Generated("DoConvenienceMethodsGenerator")
   public ItemRestrictionDo withCategories(Collection<? extends String> categories) {

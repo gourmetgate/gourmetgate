@@ -4,10 +4,7 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
-import app.gourmetgate.gourmetgate.persistence.tables.Category;
-import app.gourmetgate.gourmetgate.persistence.tables.Item;
-import app.gourmetgate.gourmetgate.persistence.tables.Person;
-import app.gourmetgate.gourmetgate.persistence.tables.Vat;
+import app.gourmetgate.gourmetgate.persistence.tables.*;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.DSL;
@@ -41,14 +38,29 @@ public class Public extends SchemaImpl {
   public final Item ITEM = Item.ITEM;
 
   /**
+   * The table <code>public.item_to_variant</code>.
+   */
+  public final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
+
+  /**
    * The table <code>public.person</code>.
    */
   public final Person PERSON = Person.PERSON;
 
   /**
-     * The table <code>public.vat</code>.
+   * The table <code>public.variant</code>.
    */
-  public final Vat VAT = Vat.VAT;
+  public final Variant VARIANT = Variant.VARIANT;
+
+  /**
+   * The table <code>public.variant_option</code>.
+   */
+  public final VariantOption VARIANT_OPTION = VariantOption.VARIANT_OPTION;
+
+  /**
+   * The table <code>public.vat</code>.
+     */
+    public final Vat VAT = Vat.VAT;
 
   /**
    * No further instances allowed
@@ -68,7 +80,10 @@ public class Public extends SchemaImpl {
     return Arrays.asList(
       Category.CATEGORY,
       Item.ITEM,
+      ItemToVariant.ITEM_TO_VARIANT,
       Person.PERSON,
+      Variant.VARIANT,
+      VariantOption.VARIANT_OPTION,
       Vat.VAT
     );
   }

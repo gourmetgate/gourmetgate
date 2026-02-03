@@ -57,7 +57,7 @@ public class Item extends TableImpl<ItemRecord> {
   /**
    * The column <code>public.item.sort_code</code>.
    */
-  public final TableField<ItemRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
+  public final TableField<ItemRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.TIMESTAMPWITHTIMEZONE)), this, "");
 
   /**
    * The column <code>public.item.category_id</code>.
@@ -82,7 +82,7 @@ public class Item extends TableImpl<ItemRecord> {
   /**
    * The column <code>public.item.status</code>.
    */
-  public final TableField<ItemRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+  public final TableField<ItemRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field(DSL.raw("'ACTIVE'::character varying"), SQLDataType.VARCHAR)), this, "");
 
   private Item(Name alias, Table<ItemRecord> aliased) {
     this(alias, aliased, (Field<?>[]) null, null);

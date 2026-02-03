@@ -1,6 +1,6 @@
 import {typeName} from "@eclipse-scout/core";
 
-@typeName("ItemRestriction")
+@typeName("gourmetgate.ItemRestriction")
 export class ItemRestrictionDo {
   categories?: string[];
   available?: boolean;

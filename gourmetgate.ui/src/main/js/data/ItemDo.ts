@@ -9,4 +9,5 @@ export class ItemDo extends BaseDoEntity {
   price: string;
   cost: string;
   available: boolean;
+  variantIds: string[];
 }

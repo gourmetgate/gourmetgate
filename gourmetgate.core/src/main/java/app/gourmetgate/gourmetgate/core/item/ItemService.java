@@ -4,27 +4,43 @@ import app.gourmetgate.gourmetgate.core.common.DoHelper;
 import app.gourmetgate.gourmetgate.core.common.EntityNotFoundException;
 import app.gourmetgate.gourmetgate.data.item.IItemRepository;
 import app.gourmetgate.gourmetgate.data.item.ItemDo;
+import app.gourmetgate.gourmetgate.data.mapping.IItemToVariantRepository;
+import app.gourmetgate.gourmetgate.data.mapping.ItemToVariantDo;
 import app.gourmetgate.gourmetgate.data.query.ItemRestrictionDo;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.platform.util.LazyValue;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ItemService implements IService {
 
   protected LazyValue<DoHelper> helper = new LazyValue<>(DoHelper.class);
 
-
   public List<ItemDo> list(ItemRestrictionDo restriction) {
-    return BEANS.get(IItemRepository.class).list(restriction)
+    List<ItemDo> items = BEANS.get(IItemRepository.class).list(restriction)
+      .toList();
+    List<UUID> itemIds = items.stream().map(ItemDo::getItemId).toList();
+
+    Map<UUID, List<UUID>> variantMappings = BEANS.get(IItemToVariantRepository.class).getByItemIds(itemIds)
+      .collect(Collectors.groupingBy(ItemToVariantDo::getItemId, Collectors.mapping(ItemToVariantDo::getVariantId, Collectors.toList())));
+
+    return items.stream()
+      .map(item -> item.withVariantIds(variantMappings.get(item.getItemId())))
       .toList();
   }
 
   public ItemDo getById(UUID uuid) {
-    return BEANS.get(IItemRepository.class).getById(uuid)
+    ItemDo item = BEANS.get(IItemRepository.class).getById(uuid)
       .orElseThrow(() -> new EntityNotFoundException("Item", uuid));
+
+    return item.withVariantIds(BEANS.get(IItemToVariantRepository.class)
+      .getByItemId(item.getItemId())
+      .map(ItemToVariantDo::getVariantId)
+      .toList());
   }
 
   public ItemDo create(ItemDo item) {
@@ -35,7 +51,9 @@ public class ItemService implements IService {
     helper.get().validateRequiredProperty(item.price());
     helper.get().validateRequiredProperty(item.available());
 
-    return BEANS.get(IItemRepository.class).create(item);
+    ItemDo newItem = BEANS.get(IItemRepository.class).create(item);
+    BEANS.get(IItemToVariantRepository.class).replaceByItemId(newItem.getItemId(), newItem.getVariantIds());
+    return newItem;
   }
 
   public ItemDo update(UUID id, ItemDo item) {
@@ -50,6 +68,7 @@ public class ItemService implements IService {
     if (affectedRows != 1) {
       throw new EntityNotFoundException("Item", id);
     }
+    BEANS.get(IItemToVariantRepository.class).replaceByItemId(item.getItemId(), item.getVariantIds());
     return item;
   }
 
@@ -59,5 +78,6 @@ public class ItemService implements IService {
     if (affectedRows != 1) {
       throw new EntityNotFoundException("Item", id);
     }
+    BEANS.get(IItemToVariantRepository.class).deleteByItemId(id);
   }
 }

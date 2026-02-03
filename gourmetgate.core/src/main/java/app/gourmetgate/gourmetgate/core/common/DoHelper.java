@@ -1,5 +1,6 @@
 package app.gourmetgate.gourmetgate.core.common;
 
+import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoNode;
 import org.eclipse.scout.rt.platform.ApplicationScoped;
 import org.eclipse.scout.rt.platform.util.StringUtility;
@@ -22,7 +23,7 @@ public class DoHelper {
       ? StringUtility.hasText(((String) node.get()))
       : node.get() != null;
 
-    if (!node.exists() || !valueValid) {
+    if ((node instanceof DoList<?> && ((DoList<?>) node).isEmpty()) || !node.exists() || !valueValid) {
       String error = String.format("%s is a required value", node.getAttributeName());
       throw new DataValidationException(error);
     }

@@ -47,7 +47,7 @@ public class Vat extends TableImpl<VatRecord> {
   /**
    * The column <code>public.vat.sort_code</code>.
    */
-  public final TableField<VatRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
+  public final TableField<VatRecord, OffsetDateTime> SORT_CODE = createField(DSL.name("sort_code"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.TIMESTAMPWITHTIMEZONE)), this, "");
 
   /**
    * The column <code>public.vat.vat_id</code>.
@@ -57,12 +57,12 @@ public class Vat extends TableImpl<VatRecord> {
   /**
    * The column <code>public.vat.description</code>.
    */
-  public final TableField<VatRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.VARCHAR(255), this, "");
+  public final TableField<VatRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
   /**
    * The column <code>public.vat.status</code>.
    */
-  public final TableField<VatRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+  public final TableField<VatRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(80).nullable(false).defaultValue(DSL.field(DSL.raw("'ACTIVE'::character varying"), SQLDataType.VARCHAR)), this, "");
 
   private Vat(Name alias, Table<VatRecord> aliased) {
     this(alias, aliased, (Field<?>[]) null, null);
