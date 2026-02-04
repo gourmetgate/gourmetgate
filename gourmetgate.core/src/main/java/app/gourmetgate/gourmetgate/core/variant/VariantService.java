@@ -12,7 +12,6 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.IService;
 import org.eclipse.scout.rt.platform.util.LazyValue;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -57,10 +56,11 @@ public class VariantService implements IService {
     helper.get().validateRequiredProperty(variant.singleOption());
     helper.get().validateRequiredProperty(variant.variantOptions());
 
-    variant = BEANS.get(IVariantRepository.class).create(variant);
-    variant.withVariantOptions(BEANS.get(VariantOptionService.class).create(variant.getVariantOptions()));
-    BEANS.get(IItemToVariantRepository.class).replaceByVariantId(variant.getVariantId(), variant.getItemIds());
-    return variant;
+    VariantDo newVariant = BEANS.get(IVariantRepository.class).create(variant);
+    newVariant.getVariantOptions().forEach(option -> option.withVariantId(newVariant.getVariantId()));
+    newVariant.withVariantOptions(BEANS.get(VariantOptionService.class).create(newVariant.getVariantOptions()));
+    BEANS.get(IItemToVariantRepository.class).replaceByVariantId(newVariant.getVariantId(), newVariant.getItemIds());
+    return newVariant;
   }
 
   public VariantDo update(UUID id, VariantDo variant) {

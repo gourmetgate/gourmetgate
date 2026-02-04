@@ -44,7 +44,7 @@ public class ItemDataProvider extends AbstractInitialDataProvider<ItemEntity> {
     hotDog.itemId = HOT_DOG_ID;
     hotDog.categoryId = CategoryDataProvider.FOOD_CATEGORY_ID;
     hotDog.vatId = VatDataProvider.VAT_STANDARD_CH_ID;
-    hotDog.name = "Burger";
+    hotDog.name = "Hot Dog";
     hotDog.price = new BigDecimal("5.00");
     hotDog.cost = new BigDecimal("2.10");
 
