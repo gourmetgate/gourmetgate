@@ -66,8 +66,7 @@ export default (): FormModel => ({
           {
             id: 'AvailableField',
             objectType: CheckBoxField,
-            label: '${textKey:Available}',
-            mandatory: true
+            label: '${textKey:Available}'
           },
           {
             id: 'AssignedVariantsField',
