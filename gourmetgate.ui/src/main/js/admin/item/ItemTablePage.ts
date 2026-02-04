@@ -11,6 +11,8 @@ import {
   QueryResponseDo,
   QueryRestClient,
   TableRowWithEntity,
+  VariantDo,
+  VariantRestClient,
   VatDo,
   VatRestClient
 } from "../../index";
@@ -39,6 +41,7 @@ export class ItemTablePage extends AdminTablePage {
     return scout.create(QueryRestClient).queryData({
       categoryRestriction: {},
       itemRestriction: {},
+      variantRestriction: {},
       vatRestriction: {}
     })
   }
@@ -46,12 +49,13 @@ export class ItemTablePage extends AdminTablePage {
   protected override _transformTableDataToTableRows(tableData: QueryResponseDo): ObjectOrModel<TableRowWithEntity>[] {
     let vatById = new Map(tableData.vat.map(vat => [vat.vatId, vat]));
     let categoryById = new Map(tableData.categories.map(c => [c.categoryId, c]));
+    let variantsById = new Map(tableData.variants.map(v => [v.variantId, v]));
 
     return tableData.items
-      .map(item => this._createItemRow(item, categoryById.get(item.categoryId), vatById.get(item.vatId)));
+      .map(item => this._createItemRow(item, categoryById.get(item.categoryId), vatById.get(item.vatId), variantsById));
   }
 
-  protected _createItemRow(item: ItemDo, category: CategoryDo, vat: VatDo): ObjectOrModel<TableRowWithEntity> {
+  protected _createItemRow(item: ItemDo, category: CategoryDo, vat: VatDo, variantsById: Map<string, VariantDo>): ObjectOrModel<TableRowWithEntity> {
     return {
       id: item.itemId,
       entity: item,
@@ -62,7 +66,8 @@ export class ItemTablePage extends AdminTablePage {
         item.available,
         item.price,
         item.cost,
-        vat.percentage
+        vat.percentage,
+        item.variantIds?.map(id => variantsById.get(id).name).join(", ")
       ]
     }
   }
@@ -101,6 +106,6 @@ export class ItemTablePage extends AdminTablePage {
   }
 
   protected _listeningDataTypes(): string[] {
-    return [CategoryRestClient.DATA_TYPE, ItemRestClient.DATA_TYPE, VatRestClient.DATA_TYPE];
+    return [CategoryRestClient.DATA_TYPE, ItemRestClient.DATA_TYPE, VariantRestClient.DATA_TYPE, VatRestClient.DATA_TYPE];
   }
 }

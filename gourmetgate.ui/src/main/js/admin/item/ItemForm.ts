@@ -26,6 +26,7 @@ export class ItemForm extends Form {
     this.widget('PriceField').setValue(this.data.price);
     this.widget('CostField').setValue(this.data.cost);
     this.widget('AvailableField').setValue(this.data.available);
+    this.widget('AssignedVariantsField').setValue(this.data.variantIds);
   }
 
   override exportData(): ItemDo {
@@ -34,9 +35,10 @@ export class ItemForm extends Form {
       categoryId: this.widget('CategoryField').value,
       vatId: this.widget('VatField').value,
       name: this.widget('NameField').value,
-      price: this.widget('PriceField').value,
-      cost: this.widget('CostField').value,
+      price: this.widget('PriceField').value.toString(),
+      cost: this.widget('CostField').value.toString(),
       available: this.widget('AvailableField').value,
+      variantIds: this.widget('AssignedVariantsField').value
     });
   }
 

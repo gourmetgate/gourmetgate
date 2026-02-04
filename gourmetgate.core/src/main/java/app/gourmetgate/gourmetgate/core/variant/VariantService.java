@@ -22,7 +22,7 @@ public class VariantService implements IService {
   protected LazyValue<DoHelper> helper = new LazyValue<>(DoHelper.class);
 
   public List<VariantDo> list(VariantRestrictionDo restriction) {
-    List<VariantDo> variants = BEANS.get(IVariantRepository.class).getAllActive() // pass restriction when necessary
+    List<VariantDo> variants = BEANS.get(IVariantRepository.class).list(restriction)
       .toList();
     List<UUID> variantIds = variants.stream().map(VariantDo::getVariantId).toList();
 

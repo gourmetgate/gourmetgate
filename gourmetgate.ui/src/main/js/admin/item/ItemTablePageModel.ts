@@ -28,7 +28,7 @@ export default (): PageWithTableModel => ({
         id: 'CategoryNameColumn',
         objectType: Column,
         text: '${textKey:Category}',
-        width: 200,
+        width: 150,
         grouped: true,
         sortActive: true,
         sortAscending: true
@@ -37,24 +37,30 @@ export default (): PageWithTableModel => ({
         id: 'AvailableColumn',
         objectType: BooleanColumn,
         text: '${textKey:Available}',
-        width: 100
+        width: 80
       },
       {
         id: 'PriceColumn',
         objectType: CurrencyColumn,
         text: '${textKey:Price}',
-        width: 200
+        width: 150
       },
       {
         id: 'CostColumn',
         objectType: CurrencyColumn,
         text: '${textKey:Cost}',
-        width: 200
+        width: 150
       },
       {
         id: 'VatColumn',
         objectType: PercentageColumn,
         text: '${textKey:Vat}',
+        width: 150
+      },
+      {
+        id: 'VariantsColumn',
+        objectType: Column,
+        text: '${textKey:Variants}',
         width: 200
       }
     ],
@@ -107,4 +113,5 @@ export type ItemTableColumnMap = {
   'PriceColumn': CurrencyColumn;
   'CostColumn': CurrencyColumn;
   'VatColumn': PercentageColumn;
+  'VariantsColumn': Column;
 };
