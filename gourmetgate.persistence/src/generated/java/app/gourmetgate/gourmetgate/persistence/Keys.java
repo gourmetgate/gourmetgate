@@ -26,7 +26,6 @@ public class Keys {
   public static final UniqueKey<CategoryRecord> CATEGORY_PKEY = Internal.createUniqueKey(Category.CATEGORY, DSL.name("category_pkey"), new TableField[]{Category.CATEGORY.CATEGORY_ID}, true);
   public static final UniqueKey<ItemRecord> ITEM_PKEY = Internal.createUniqueKey(Item.ITEM, DSL.name("item_pkey"), new TableField[]{Item.ITEM.ITEM_ID}, true);
   public static final UniqueKey<ItemToVariantRecord> ITEM_TO_VARIANT_PKEY = Internal.createUniqueKey(ItemToVariant.ITEM_TO_VARIANT, DSL.name("item_to_variant_pkey"), new TableField[]{ItemToVariant.ITEM_TO_VARIANT.ITEM_ID, ItemToVariant.ITEM_TO_VARIANT.VARIANT_ID}, true);
-  public static final UniqueKey<PersonRecord> PERSON_PKEY = Internal.createUniqueKey(Person.PERSON, DSL.name("person_pkey"), new TableField[]{Person.PERSON.PERSON_ID}, true);
   public static final UniqueKey<VariantRecord> VARIANT_PKEY = Internal.createUniqueKey(Variant.VARIANT, DSL.name("variant_pkey"), new TableField[]{Variant.VARIANT.VARIANT_ID}, true);
   public static final UniqueKey<VariantOptionRecord> VARIANT_OPTION_PKEY = Internal.createUniqueKey(VariantOption.VARIANT_OPTION, DSL.name("variant_option_pkey"), new TableField[]{VariantOption.VARIANT_OPTION.VARIANT_OPTION_ID}, true);
   public static final UniqueKey<VatRecord> VAT_PKEY = Internal.createUniqueKey(Vat.VAT, DSL.name("vat_pkey"), new TableField[]{Vat.VAT.VAT_ID}, true);

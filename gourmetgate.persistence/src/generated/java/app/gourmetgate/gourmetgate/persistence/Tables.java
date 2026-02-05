@@ -29,11 +29,6 @@ public class Tables {
   public static final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
 
   /**
-   * The table <code>public.person</code>.
-   */
-  public static final Person PERSON = Person.PERSON;
-
-  /**
    * The table <code>public.variant</code>.
    */
   public static final Variant VARIANT = Variant.VARIANT;
