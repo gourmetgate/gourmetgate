@@ -50,15 +50,6 @@ export * from './admin/vat/VatLookupCall';
 export * from './admin/vat/VatRestClient';
 export * from './admin/vat/VatTablePage';
 export * from './admin/vat/VatForm';
-export * from './rest/AbstractItemResponse';
-export * from './rest/AbstractPersonRestClient';
-export * from './person/PersonDo';
-export * from './person/PersonForm';
-export * from './person/PersonResponse';
-export * from './person/PersonRestClient';
-export * from './person/PersonRestrictionDo';
-export * from './person/PersonSearchForm';
-export * from './person/PersonTablePage';
 
 export default self;
 ObjectFactory.get().registerNamespace('gourmetgate', self);
