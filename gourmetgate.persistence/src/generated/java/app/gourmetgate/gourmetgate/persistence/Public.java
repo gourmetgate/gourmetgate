@@ -43,11 +43,6 @@ public class Public extends SchemaImpl {
   public final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
 
   /**
-   * The table <code>public.person</code>.
-   */
-  public final Person PERSON = Person.PERSON;
-
-  /**
    * The table <code>public.variant</code>.
    */
   public final Variant VARIANT = Variant.VARIANT;
@@ -59,15 +54,15 @@ public class Public extends SchemaImpl {
 
   /**
    * The table <code>public.vat</code>.
-     */
+   */
     public final Vat VAT = Vat.VAT;
 
-  /**
-   * No further instances allowed
-   */
-  private Public() {
-    super(DSL.name("public"), null, DSL.comment("standard public schema"));
-  }
+    /**
+     * No further instances allowed
+     */
+    private Public() {
+      super(DSL.name("public"), null, DSL.comment("standard public schema"));
+    }
 
 
   @Override
@@ -81,7 +76,6 @@ public class Public extends SchemaImpl {
       Category.CATEGORY,
       Item.ITEM,
       ItemToVariant.ITEM_TO_VARIANT,
-      Person.PERSON,
       Variant.VARIANT,
       VariantOption.VARIANT_OPTION,
       Vat.VAT
