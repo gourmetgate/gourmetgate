@@ -4,6 +4,7 @@ export * from './App';
 export * from './objectFactories';
 export * from './desktop/Desktop';
 export * from './desktop/DataOutline';
+export * from './desktop/GourmetgateLoginBox';
 export * from './rest/AbstractItemResponse';
 export * from './rest/AbstractRestClient';
 export * from './person/PersonDo';

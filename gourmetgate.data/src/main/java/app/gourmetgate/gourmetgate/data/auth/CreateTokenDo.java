@@ -1,19 +1,19 @@
-package app.gourmetgate.gourmetgate.data.person;
+package app.gourmetgate.gourmetgate.data.auth;
 
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 import org.eclipse.scout.rt.dataobject.TypeName;
 
-@TypeName("gourmetgate.PersonRestriction")
-public class PersonRestrictionDo extends DoEntity {
+@TypeName("gourmetgate.CreateToken")
+public class CreateTokenDo extends DoEntity {
 
-    public DoValue<String> firstName() {
-        return doValue("firstName");
+    public DoValue<String> userName() {
+        return doValue("userName");
     }
 
-    public DoValue<String> lastName() {
-        return doValue("lastName");
+    public DoValue<String> password() {
+        return doValue("password");
     }
 
     /* **************************************************************************
@@ -21,24 +21,24 @@ public class PersonRestrictionDo extends DoEntity {
      * *************************************************************************/
 
     @Generated("DoConvenienceMethodsGenerator")
-    public PersonRestrictionDo withFirstName(String firstName) {
-        firstName().set(firstName);
+    public CreateTokenDo withUserName(String userName) {
+        userName().set(userName);
         return this;
     }
 
     @Generated("DoConvenienceMethodsGenerator")
-    public String getFirstName() {
-        return firstName().get();
+    public String getUserName() {
+        return userName().get();
     }
 
     @Generated("DoConvenienceMethodsGenerator")
-    public PersonRestrictionDo withLastName(String lastName) {
-        lastName().set(lastName);
+    public CreateTokenDo withPassword(String password) {
+        password().set(password);
         return this;
     }
 
     @Generated("DoConvenienceMethodsGenerator")
-    public String getLastName() {
-        return lastName().get();
+    public String getPassword() {
+        return password().get();
     }
 }

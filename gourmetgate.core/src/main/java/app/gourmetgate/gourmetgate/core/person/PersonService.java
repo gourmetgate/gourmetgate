@@ -13,6 +13,7 @@ import org.eclipse.scout.rt.platform.service.IService;
 import app.gourmetgate.gourmetgate.data.person.IPersonRepository;
 import app.gourmetgate.gourmetgate.data.person.PersonDo;
 import app.gourmetgate.gourmetgate.data.person.PersonRestrictionDo;
+import org.eclipse.scout.rt.shared.session.Sessions;
 
 public class PersonService implements IService {
 

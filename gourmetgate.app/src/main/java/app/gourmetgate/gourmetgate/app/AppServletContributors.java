@@ -6,8 +6,11 @@ import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.scout.rt.jetty.IServletContributor;
 import org.eclipse.scout.rt.jetty.IServletFilterContributor;
 import org.eclipse.scout.rt.platform.Order;
+import org.eclipse.scout.rt.platform.util.StringUtility;
 import org.eclipse.scout.rt.rest.RestApplication;
+import org.eclipse.scout.rt.server.ServiceTunnelServlet;
 import org.eclipse.scout.rt.server.context.HttpServerRunContextFilter;
+import org.eclipse.scout.rt.ui.html.app.UiServletContributors;
 import org.eclipse.scout.rt.ui.html.app.UiServletContributors.UiServletContributor;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -29,7 +32,7 @@ public final class AppServletContributors {
    * Filters for API access.
    */
   @Order(4000)
-  public static class RestAuthFilterContributor implements IServletFilterContributor {
+  public static class RestAuthFilterContributor extends UiServletContributors.AuthFilterContributor {
 
     @Override
     public void contribute(ServletContextHandler handler) {
@@ -55,6 +58,7 @@ public final class AppServletContributors {
 
     @Override
     public void contribute(ServletContextHandler handler) {
+      handler.addServlet(ServiceTunnelServlet.class, "/auth/*");
       ServletHolder servlet = handler.addServlet(ServletContainer.class, "/api/*");
       servlet.setInitParameter(ServerProperties.WADL_FEATURE_DISABLE, Boolean.TRUE.toString());
       servlet.setInitParameter(ServletProperties.JAXRS_APPLICATION_CLASS, RestApplication.class.getName());

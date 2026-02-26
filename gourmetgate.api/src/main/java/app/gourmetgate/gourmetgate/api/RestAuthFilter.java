@@ -1,38 +1,47 @@
 package app.gourmetgate.gourmetgate.api;
 
-import java.io.IOException;
-
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import app.gourmetgate.gourmetgate.core.auth.GourmetgateCredentialVerifier;
+import app.gourmetgate.gourmetgate.core.auth.GourmetgateTokenVerifier;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.server.commons.authentication.AnonymousAccessController;
+import org.eclipse.scout.rt.server.commons.authentication.BearerAuthAccessController;
+import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAccessController;
+import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController;
+
+import java.io.IOException;
 
 /**
  * <h3>{@link RestAuthFilter}</h3>
  */
 public class RestAuthFilter implements Filter {
 
-  private AnonymousAccessController m_anonymousAccessController;
+  private DevelopmentAccessController m_developmentAccessController;
+  private BearerAuthAccessController m_bearerAuthAccessController;
 
   @Override
   public void init(FilterConfig filterConfig) {
-    m_anonymousAccessController = BEANS.get(AnonymousAccessController.class)
-      .init(new AnonymousAccessController.AnonymousAuthConfig()
-        .withPutPrincipalOnSession(false));
+    m_developmentAccessController = BEANS.get(DevelopmentAccessController.class)
+      .init(new DevelopmentAccessController.DevelopmentAuthConfig()
+        .withPutPrincipalOnSession(false)
+        .withEnabled(true)
+      );
+    m_bearerAuthAccessController = BEANS.get(BearerAuthAccessController.class).init(
+      new BearerAuthAccessController.HttpBearerAuthConfig()
+        .withEnabled(true)
+        .withTokenVerifier(BEANS.get(GourmetgateTokenVerifier.class))
+    );
   }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     final HttpServletRequest req = (HttpServletRequest) request;
     final HttpServletResponse resp = (HttpServletResponse) response;
-
-    if (m_anonymousAccessController.handle(req, resp, chain)) {
+    if (m_bearerAuthAccessController.handle(req, resp, chain)) {
+      return;
+    }
+    if (m_developmentAccessController.handle(req, resp, chain)) {
       return;
     }
 
@@ -41,6 +50,7 @@ public class RestAuthFilter implements Filter {
 
   @Override
   public void destroy() {
-    m_anonymousAccessController.destroy();
+    m_developmentAccessController.destroy();
+    m_bearerAuthAccessController.destroy();
   }
 }
