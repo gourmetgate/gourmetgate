@@ -1,6 +1,6 @@
 {
   "name": "@gourmetgate/ui",
-  "version": "1.0.0-4",
+  "version": "1.0.0-5",
   "engines": {
     "node": ">=22.12.0",
     "npm": ">=10.9.0",

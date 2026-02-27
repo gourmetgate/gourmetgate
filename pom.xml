@@ -8,7 +8,7 @@
     <relativePath/>
   </parent>
   <properties>
-    <gourmetgate.version>1.0.0-4</gourmetgate.version>
+    <gourmetgate.version>1.0.0-5</gourmetgate.version>
   </properties>
   <groupId>app.gourmetgate</groupId>
   <artifactId>gourmetgate-root</artifactId>
