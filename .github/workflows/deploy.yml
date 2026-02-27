@@ -33,7 +33,7 @@ jobs:
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.ui/package.json
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.app/package.json
 
-      - name: Commit changes
+      - name: commit changes
         run: |
           echo update version to ${{ steps.bump-version.outputs.version }}
           git config --global user.email "ci@gourmetgate.app"
@@ -43,12 +43,21 @@ jobs:
           git add .
           git commit -m "Update version to  ${{ steps.bump-version.outputs.version }}"
           git push
+      - name: Upload pom.xml
+        uses: actions/upload-artifact@v4
+        with:
+          name: pom
+          path: pom.xml
   build-docker-image:
     runs-on: ubuntu-latest
     needs: update-version
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+      - name: Download pom.xml
+        uses: actions/download-artifact@v4
+        with:
+          name: pom
       - name: Building Docker image
         run: mvn clean install -Pexec.docker.image -Djib.allowInsecureRegistries=true
     env:
