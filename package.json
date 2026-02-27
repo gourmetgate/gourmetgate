@@ -1,6 +1,6 @@
 {
   "name": "@gourmetgate/root",
-  "version": "1.0.0-3",
+  "version": "1.0.0-4",
   "private": true,
   "scripts": {
     "pnpm-install": "pnpm install --ignore-scripts"
