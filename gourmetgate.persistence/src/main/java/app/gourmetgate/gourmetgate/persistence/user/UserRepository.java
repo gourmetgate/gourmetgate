@@ -1,5 +1,6 @@
 package app.gourmetgate.gourmetgate.persistence.user;
 
+import app.gourmetgate.gourmetgate.data.user.IUserRepository;
 import app.gourmetgate.gourmetgate.data.user.UserDo;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
 import app.gourmetgate.gourmetgate.persistence.common.DoEntityBeanMappings;
@@ -10,8 +11,9 @@ import org.jooq.Field;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
+import java.util.stream.Stream;
 
-public class UserRepository extends AbstractEntityRepository<User, UserRecord, UserDo> {
+public class UserRepository extends AbstractEntityRepository<User, UserRecord, UserDo> implements IUserRepository {
   @Override
   public Field<OffsetDateTime> getSortColumn() {
     return User.USER.SORT_CODE;
@@ -48,5 +50,10 @@ public class UserRepository extends AbstractEntityRepository<User, UserRecord, U
   @Override
   public Field<UUID> getIdColumn() {
     return User.USER.USER_ID;
+  }
+
+  @Override
+  public Stream<UserDo> list(UserDo restriction) {
+    return Stream.empty();
   }
 }
