@@ -4,7 +4,13 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
-import app.gourmetgate.gourmetgate.persistence.tables.*;
+import app.gourmetgate.gourmetgate.persistence.tables.Category;
+import app.gourmetgate.gourmetgate.persistence.tables.Item;
+import app.gourmetgate.gourmetgate.persistence.tables.ItemToVariant;
+import app.gourmetgate.gourmetgate.persistence.tables.User;
+import app.gourmetgate.gourmetgate.persistence.tables.Variant;
+import app.gourmetgate.gourmetgate.persistence.tables.VariantOption;
+import app.gourmetgate.gourmetgate.persistence.tables.Vat;
 
 
 /**
@@ -13,33 +19,38 @@ import app.gourmetgate.gourmetgate.persistence.tables.*;
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
-  /**
-   * The table <code>public.category</code>.
-   */
-  public static final Category CATEGORY = Category.CATEGORY;
+    /**
+     * The table <code>public.category</code>.
+     */
+    public static final Category CATEGORY = Category.CATEGORY;
 
-  /**
-   * The table <code>public.item</code>.
-   */
-  public static final Item ITEM = Item.ITEM;
+    /**
+     * The table <code>public.item</code>.
+     */
+    public static final Item ITEM = Item.ITEM;
 
-  /**
-   * The table <code>public.item_to_variant</code>.
-   */
-  public static final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
+    /**
+     * The table <code>public.item_to_variant</code>.
+     */
+    public static final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
 
-  /**
-   * The table <code>public.variant</code>.
-   */
-  public static final Variant VARIANT = Variant.VARIANT;
+    /**
+     * The table <code>public.user</code>.
+     */
+    public static final User USER = User.USER;
 
-  /**
-   * The table <code>public.variant_option</code>.
-   */
-  public static final VariantOption VARIANT_OPTION = VariantOption.VARIANT_OPTION;
+    /**
+     * The table <code>public.variant</code>.
+     */
+    public static final Variant VARIANT = Variant.VARIANT;
 
-  /**
-   * The table <code>public.vat</code>.
-   */
-  public static final Vat VAT = Vat.VAT;
+    /**
+     * The table <code>public.variant_option</code>.
+     */
+    public static final VariantOption VARIANT_OPTION = VariantOption.VARIANT_OPTION;
+
+    /**
+     * The table <code>public.vat</code>.
+     */
+    public static final Vat VAT = Vat.VAT;
 }
