@@ -9,10 +9,13 @@ permissions:
 jobs:
   update-version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.bump-version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: Bump Version
+        id: bump-version
         run: |
           export CURRENT_VERSION=$(grep -oP '(?<=<gourmetgate.version>)[^<]+' pom.xml)
           echo "Current revision in pom.xml: $CURRENT_VERSION"
@@ -24,6 +27,7 @@ jobs:
             NEW_VERSION="$CURRENT_VERSION-1"
           fi
           echo New version: $NEW_VERSION
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           sed -i "s/<gourmetgate.version>$CURRENT_VERSION<\/gourmetgate.version>/<gourmetgate.version>$NEW_VERSION<\/gourmetgate.version>/" pom.xml
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" package.json
           sed -i "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" gourmetgate.ui/package.json
@@ -31,15 +35,17 @@ jobs:
 
       - name: Commit changes
         run: |
+          echo update version to ${{ steps.bump-version.outputs.version }}
           git config --global user.email "ci@gourmetgate.app"
           git config --global user.name "CI Bot"
           git config pull.rebase true
           git checkout $CI_COMMIT_REF_NAME
           git add .
-          git commit -m "Update version to $NEW_VERSION"
+          git commit -m "Update version to  ${{ steps.bump-version.outputs.version }}"
           git push
-  Build-Docker-Image:
+  build-docker-image:
     runs-on: ubuntu-latest
+    needs: update-version
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
@@ -48,3 +54,31 @@ jobs:
     env:
       GITHUB_ACTOR: ${{ github.actor }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  update-helm-charts:
+    runs-on: ubuntu-latest
+    needs:
+      - update-version
+      - build-docker-image
+    steps:
+      - name: Checkout App Repo
+        uses: actions/checkout@v4
+      - name: Checkout Inventory Repo
+        uses: actions/checkout@v4
+        with:
+          repository: gourmetgate/inventories
+          token: ${{ secrets.INVENTORY_REPO_TOKEN }}
+          path: inventories
+      - name: Update values.yaml Version
+        run: |
+          cd inventories/gourmetgate/test
+          VERSION="${{ needs.update-version.outputs.version }}"
+          echo "Updating Helm chart to version: $VERSION"
+          sed -i "s/^version:.*/version: $VERSION/" values-test.yaml
+      - name: Commit and Push Changes
+        run: |
+          cd inventories
+          git config --global user.email "ci@gourmetgate.app"
+          git config --global user.name "CI Bot"
+          git add .
+          git commit -m "Update app version to ${{ needs.update-version.outputs.version }}"
+          git push
