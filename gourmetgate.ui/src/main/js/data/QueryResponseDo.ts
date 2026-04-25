@@ -7,4 +7,5 @@ export class QueryResponseDo extends BaseDoEntity {
   items?: ItemDo[];
   variants?: VariantDo[];
   vat?: VatDo[];
+  users?: UserDo[];
 }

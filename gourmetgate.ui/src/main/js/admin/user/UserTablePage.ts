@@ -30,11 +30,21 @@ export class UserTablePage extends AdminTablePage {
     deleteuserMenu.on('action', this._onDeleteUserMenuAction.bind(this));
   }
 
-  protected override _transformTableDataToTableRows(tableData: UserResponseDo): ObjectOrModel<TableRowWithEntity>[] {
-    return tableData.users
-      .map(userDo => this._createItemRow(userDo));
+  protected override _loadTableData(): JQuery.Promise<QueryResponseDo> {
+    return scout.create(QueryRestClient).queryData({
+            categoryRestriction: {},
+            itemRestriction: {},
+            variantRestriction: {},
+            vatRestriction: {}
+            userRestriction: {}
+    })
   }
-  protected _createItemRow(user: UserDo): ObjectOrModel<TableRowWithEntity> {
+
+  protected override _transformTableDataToTableRows(tableData: QueryResponseDo): ObjectOrModel<TableRowWithEntity>[] {
+    return tableData.users
+      .map(userDo => this._createUserRow(userDo));
+  }
+  protected _createUserRow(user: UserDo): ObjectOrModel<TableRowWithEntity> {
     return {
       id: user.userId,
       entity: user,

@@ -2,6 +2,7 @@ package app.gourmetgate.gourmetgate.api.user;
 
 import app.gourmetgate.gourmetgate.core.common.DoHelper;
 import app.gourmetgate.gourmetgate.core.user.UserService;
+import app.gourmetgate.gourmetgate.data.query.UserRestrictionDo;
 import app.gourmetgate.gourmetgate.data.user.UserDo;
 import app.gourmetgate.gourmetgate.data.user.UserResponseDo;
 import jakarta.ws.rs.*;
@@ -53,6 +54,6 @@ public class UserResource implements IRestResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public UserResponseDo getAll() {
     return BEANS.get(UserResponseDo.class)
-      .withUsers(BEANS.get(UserService.class).list(BEANS.get(UserDo.class)));
+      .withUsers(BEANS.get(UserService.class).list(BEANS.get(UserRestrictionDo.class)));
   }
 }

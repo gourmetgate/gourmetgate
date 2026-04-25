@@ -1,14 +1,12 @@
-package app.gourmetgate.gourmetgate.data.user;
+package app.gourmetgate.gourmetgate.data.query;
 
 import jakarta.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
-import org.eclipse.scout.rt.dataobject.TypeName;
 
 import java.util.UUID;
 
-@TypeName("gourmetgate.UserDo")
-public class UserDo extends DoEntity {
+public class UserRestrictionDo extends DoEntity {
 
     public DoValue<UUID> userId() {
         return doValue("userId");
@@ -18,20 +16,12 @@ public class UserDo extends DoEntity {
         return doValue("userName");
     }
 
-    public DoValue<String> password() {
-        return doValue("password");
-    }
-
-    public DoValue<String> salt() {
-        return doValue("salt");
-    }
-
     /* **************************************************************************
      * GENERATED CONVENIENCE METHODS
      * *************************************************************************/
 
     @Generated("DoConvenienceMethodsGenerator")
-    public UserDo withUserId(UUID userId) {
+    public UserRestrictionDo withUserId(UUID userId) {
         userId().set(userId);
         return this;
     }
@@ -42,7 +32,7 @@ public class UserDo extends DoEntity {
     }
 
     @Generated("DoConvenienceMethodsGenerator")
-    public UserDo withUserName(String userName) {
+    public UserRestrictionDo withUserName(String userName) {
         userName().set(userName);
         return this;
     }
@@ -50,27 +40,5 @@ public class UserDo extends DoEntity {
     @Generated("DoConvenienceMethodsGenerator")
     public String getUserName() {
         return userName().get();
-    }
-
-    @Generated("DoConvenienceMethodsGenerator")
-    public UserDo withPassword(String password) {
-        password().set(password);
-        return this;
-    }
-
-    @Generated("DoConvenienceMethodsGenerator")
-    public String getPassword() {
-        return password().get();
-    }
-
-    @Generated("DoConvenienceMethodsGenerator")
-    public UserDo withSalt(String salt) {
-        salt().set(salt);
-        return this;
-    }
-
-    @Generated("DoConvenienceMethodsGenerator")
-    public String getSalt() {
-        return salt().get();
     }
 }

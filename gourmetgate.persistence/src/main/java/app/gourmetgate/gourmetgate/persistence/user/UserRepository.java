@@ -1,5 +1,7 @@
 package app.gourmetgate.gourmetgate.persistence.user;
 
+import app.gourmetgate.gourmetgate.data.query.UserRestrictionDo;
+import app.gourmetgate.gourmetgate.data.status.Status;
 import app.gourmetgate.gourmetgate.data.user.IUserRepository;
 import app.gourmetgate.gourmetgate.data.user.UserDo;
 import app.gourmetgate.gourmetgate.persistence.common.AbstractEntityRepository;
@@ -12,6 +14,9 @@ import org.jooq.Field;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import java.util.stream.Stream;
+
+import static app.gourmetgate.gourmetgate.persistence.JooqSqlService.jooq;
+import static org.jooq.impl.DSL.noCondition;
 
 public class UserRepository extends AbstractEntityRepository<User, UserRecord, UserDo> implements IUserRepository {
   @Override
@@ -39,7 +44,8 @@ public class UserRepository extends AbstractEntityRepository<User, UserRecord, U
     return new DoEntityBeanMappings<UserDo, UserRecord>()
       .with(UserDo::userId, UserRecord::getUserId, UserRecord::setUserId)
       .with(UserDo::userName, UserRecord::getUserName, UserRecord::setUserName)
-      .with(UserDo::password, UserRecord::getPassword, UserRecord::setPassword);
+      .with(UserDo::password, UserRecord::getPassword, UserRecord::setPassword)
+      .with(UserDo::salt, UserRecord::getSalt, UserRecord::setSalt);
   }
 
   @Override
@@ -53,7 +59,15 @@ public class UserRepository extends AbstractEntityRepository<User, UserRecord, U
   }
 
   @Override
-  public Stream<UserDo> list(UserDo restriction) {
-    return Stream.empty();
+  public Stream<UserDo> list(UserRestrictionDo restriction) {
+    return jooq()
+      .selectFrom(getTable())
+      .where(
+        getTable().STATUS.eq(Status.ACTIVE.id),
+        restriction.userId().exists() ? getIdColumn().eq(restriction.getUserId()) : noCondition(),
+        restriction.userName().exists() ? getTextMatchingCondition(getTable().USER_NAME, restriction.getUserName()) : noCondition()
+      )
+      .fetchStream()
+      .map(this::toNewDo);
   }
 }
