@@ -35,7 +35,7 @@ export class UserTablePage extends AdminTablePage {
             categoryRestriction: {},
             itemRestriction: {},
             variantRestriction: {},
-            vatRestriction: {}
+            vatRestriction: {},
             userRestriction: {}
     })
   }
