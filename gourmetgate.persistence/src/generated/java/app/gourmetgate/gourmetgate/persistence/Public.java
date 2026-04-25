@@ -4,81 +4,94 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
-import app.gourmetgate.gourmetgate.persistence.tables.*;
+import app.gourmetgate.gourmetgate.persistence.tables.Category;
+import app.gourmetgate.gourmetgate.persistence.tables.Item;
+import app.gourmetgate.gourmetgate.persistence.tables.ItemToVariant;
+import app.gourmetgate.gourmetgate.persistence.tables.User;
+import app.gourmetgate.gourmetgate.persistence.tables.Variant;
+import app.gourmetgate.gourmetgate.persistence.tables.VariantOption;
+import app.gourmetgate.gourmetgate.persistence.tables.Vat;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SchemaImpl;
 
-import java.util.Arrays;
-import java.util.List;
-
 
 /**
  * standard public schema
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Public extends SchemaImpl {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * The reference instance of <code>public</code>
-   */
-  public static final Public PUBLIC = new Public();
+    /**
+     * The reference instance of <code>public</code>
+     */
+    public static final Public PUBLIC = new Public();
 
-  /**
-   * The table <code>public.category</code>.
-   */
-  public final Category CATEGORY = Category.CATEGORY;
+    /**
+     * The table <code>public.category</code>.
+     */
+    public final Category CATEGORY = Category.CATEGORY;
 
-  /**
-   * The table <code>public.item</code>.
-   */
-  public final Item ITEM = Item.ITEM;
+    /**
+     * The table <code>public.item</code>.
+     */
+    public final Item ITEM = Item.ITEM;
 
-  /**
-   * The table <code>public.item_to_variant</code>.
-   */
-  public final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
+    /**
+     * The table <code>public.item_to_variant</code>.
+     */
+    public final ItemToVariant ITEM_TO_VARIANT = ItemToVariant.ITEM_TO_VARIANT;
 
-  /**
-   * The table <code>public.variant</code>.
-   */
-  public final Variant VARIANT = Variant.VARIANT;
+    /**
+     * The table <code>public.user</code>.
+     */
+    public final User USER = User.USER;
 
-  /**
-   * The table <code>public.variant_option</code>.
-   */
-  public final VariantOption VARIANT_OPTION = VariantOption.VARIANT_OPTION;
+    /**
+     * The table <code>public.variant</code>.
+     */
+    public final Variant VARIANT = Variant.VARIANT;
 
-  /**
-   * The table <code>public.vat</code>.
-   */
+    /**
+     * The table <code>public.variant_option</code>.
+     */
+    public final VariantOption VARIANT_OPTION = VariantOption.VARIANT_OPTION;
+
+    /**
+     * The table <code>public.vat</code>.
+     */
     public final Vat VAT = Vat.VAT;
 
     /**
      * No further instances allowed
      */
     private Public() {
-      super(DSL.name("public"), null, DSL.comment("standard public schema"));
+        super(DSL.name("public"), null, DSL.comment("standard public schema"));
     }
 
 
-  @Override
-  public Catalog getCatalog() {
-    return DefaultCatalog.DEFAULT_CATALOG;
-  }
+    @Override
+    public Catalog getCatalog() {
+        return DefaultCatalog.DEFAULT_CATALOG;
+    }
 
-  @Override
-  public final List<Table<?>> getTables() {
-    return Arrays.asList(
-      Category.CATEGORY,
-      Item.ITEM,
-      ItemToVariant.ITEM_TO_VARIANT,
-      Variant.VARIANT,
-      VariantOption.VARIANT_OPTION,
-      Vat.VAT
-    );
-  }
+    @Override
+    public final List<Table<?>> getTables() {
+        return Arrays.asList(
+            Category.CATEGORY,
+            Item.ITEM,
+            ItemToVariant.ITEM_TO_VARIANT,
+            User.USER,
+            Variant.VARIANT,
+            VariantOption.VARIANT_OPTION,
+            Vat.VAT
+        );
+    }
 }

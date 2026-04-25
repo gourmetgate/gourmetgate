@@ -4,12 +4,12 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.jooq.Constants;
 import org.jooq.Schema;
 import org.jooq.impl.CatalogImpl;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -18,37 +18,37 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class DefaultCatalog extends CatalogImpl {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * The reference instance of <code>DEFAULT_CATALOG</code>
-   */
-  public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
+    /**
+     * The reference instance of <code>DEFAULT_CATALOG</code>
+     */
+    public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
-  /**
-   * standard public schema
-   */
-  public final Public PUBLIC = Public.PUBLIC;
+    /**
+     * standard public schema
+     */
+    public final Public PUBLIC = Public.PUBLIC;
 
-  /**
-   * No further instances allowed
-   */
-  private DefaultCatalog() {
-    super("");
-  }
+    /**
+     * No further instances allowed
+     */
+    private DefaultCatalog() {
+        super("");
+    }
 
-  @Override
-  public final List<Schema> getSchemas() {
-    return Arrays.asList(
-      Public.PUBLIC
-    );
-  }
+    @Override
+    public final List<Schema> getSchemas() {
+        return Arrays.asList(
+            Public.PUBLIC
+        );
+    }
 
-  /**
-   * A reference to the 3.20 minor release of the code generator. If this
-   * doesn't compile, it's because the runtime library uses an older minor
-   * release, namely: 3.20. You can turn off the generation of this reference
-   * by specifying /configuration/generator/generate/jooqVersionReference
-   */
-  private static final String REQUIRE_RUNTIME_JOOQ_VERSION = Constants.VERSION_3_20;
+    /**
+     * A reference to the 3.20 minor release of the code generator. If this
+     * doesn't compile, it's because the runtime library uses an older minor
+     * release, namely: 3.20. You can turn off the generation of this reference
+     * by specifying /configuration/generator/generate/jooqVersionReference
+     */
+    private static final String REQUIRE_RUNTIME_JOOQ_VERSION = Constants.VERSION_3_20;
 }

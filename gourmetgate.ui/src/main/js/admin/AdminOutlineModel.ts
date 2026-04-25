@@ -1,5 +1,6 @@
 import {Outline, OutlineModel} from '@eclipse-scout/core';
 import {CategoryTablePage, ItemTablePage, VariantTablePage, VatTablePage} from '../index';
+import {UserTablePage} from "./user/UserTablePage";
 
 export default (): OutlineModel => ({
   id: 'gourmetgate.AdminOutline',
@@ -17,6 +18,9 @@ export default (): OutlineModel => ({
     },
     {
       objectType: VatTablePage
+    },
+    {
+      objectType: UserTablePage
     }
   ]
 });

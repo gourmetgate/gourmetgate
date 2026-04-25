@@ -2,6 +2,7 @@ package app.gourmetgate.gourmetgate.data.query;
 
 import app.gourmetgate.gourmetgate.data.category.CategoryDo;
 import app.gourmetgate.gourmetgate.data.item.ItemDo;
+import app.gourmetgate.gourmetgate.data.user.UserDo;
 import app.gourmetgate.gourmetgate.data.variant.VariantDo;
 import app.gourmetgate.gourmetgate.data.vat.VatDo;
 import jakarta.annotation.Generated;
@@ -15,91 +16,112 @@ import java.util.List;
 @TypeName("gourmetgate.QueryResponse")
 public class QueryResponseDo extends DoEntity {
 
-  public DoList<CategoryDo> categories() {
-    return doList("categories");
-  }
+    public DoList<CategoryDo> categories() {
+        return doList("categories");
+    }
 
-  public DoList<ItemDo> items() {
-    return doList("items");
-  }
+    public DoList<ItemDo> items() {
+        return doList("items");
+    }
 
-  public DoList<VariantDo> variants() {
-    return doList("variants");
-  }
+    public DoList<VariantDo> variants() {
+        return doList("variants");
+    }
 
-  public DoList<VatDo> vat() {
-    return doList("vat");
-  }
+    public DoList<VatDo> vat() {
+        return doList("vat");
+    }
 
-  /* **************************************************************************
-   * GENERATED CONVENIENCE METHODS
-   * *************************************************************************/
+    public DoList<UserDo> users() {
+        return doList("users");
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withCategories(Collection<? extends CategoryDo> categories) {
-    categories().updateAll(categories);
-    return this;
-  }
+    /* **************************************************************************
+     * GENERATED CONVENIENCE METHODS
+     * *************************************************************************/
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withCategories(CategoryDo... categories) {
-    categories().updateAll(categories);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withCategories(Collection<? extends CategoryDo> categories) {
+        categories().updateAll(categories);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public List<CategoryDo> getCategories() {
-    return categories().get();
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withCategories(CategoryDo... categories) {
+        categories().updateAll(categories);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withItems(Collection<? extends ItemDo> items) {
-    items().updateAll(items);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public List<CategoryDo> getCategories() {
+        return categories().get();
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withItems(ItemDo... items) {
-    items().updateAll(items);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withItems(Collection<? extends ItemDo> items) {
+        items().updateAll(items);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public List<ItemDo> getItems() {
-    return items().get();
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withItems(ItemDo... items) {
+        items().updateAll(items);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withVariants(Collection<? extends VariantDo> variants) {
-    variants().updateAll(variants);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public List<ItemDo> getItems() {
+        return items().get();
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withVariants(VariantDo... variants) {
-    variants().updateAll(variants);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withVariants(Collection<? extends VariantDo> variants) {
+        variants().updateAll(variants);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public List<VariantDo> getVariants() {
-    return variants().get();
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withVariants(VariantDo... variants) {
+        variants().updateAll(variants);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withVat(Collection<? extends VatDo> vat) {
-    vat().updateAll(vat);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public List<VariantDo> getVariants() {
+        return variants().get();
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public QueryResponseDo withVat(VatDo... vat) {
-    vat().updateAll(vat);
-    return this;
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withVat(Collection<? extends VatDo> vat) {
+        vat().updateAll(vat);
+        return this;
+    }
 
-  @Generated("DoConvenienceMethodsGenerator")
-  public List<VatDo> getVat() {
-    return vat().get();
-  }
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withVat(VatDo... vat) {
+        vat().updateAll(vat);
+        return this;
+    }
+
+    @Generated("DoConvenienceMethodsGenerator")
+    public List<VatDo> getVat() {
+        return vat().get();
+    }
+
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withUsers(Collection<? extends UserDo> users) {
+        users().updateAll(users);
+        return this;
+    }
+
+    @Generated("DoConvenienceMethodsGenerator")
+    public QueryResponseDo withUsers(UserDo... users) {
+        users().updateAll(users);
+        return this;
+    }
+
+    @Generated("DoConvenienceMethodsGenerator")
+    public List<UserDo> getUsers() {
+        return users().get();
+    }
 }

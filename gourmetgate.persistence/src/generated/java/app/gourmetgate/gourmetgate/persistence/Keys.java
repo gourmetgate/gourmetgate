@@ -4,8 +4,21 @@
 package app.gourmetgate.gourmetgate.persistence;
 
 
-import app.gourmetgate.gourmetgate.persistence.tables.*;
-import app.gourmetgate.gourmetgate.persistence.tables.records.*;
+import app.gourmetgate.gourmetgate.persistence.tables.Category;
+import app.gourmetgate.gourmetgate.persistence.tables.Item;
+import app.gourmetgate.gourmetgate.persistence.tables.ItemToVariant;
+import app.gourmetgate.gourmetgate.persistence.tables.User;
+import app.gourmetgate.gourmetgate.persistence.tables.Variant;
+import app.gourmetgate.gourmetgate.persistence.tables.VariantOption;
+import app.gourmetgate.gourmetgate.persistence.tables.Vat;
+import app.gourmetgate.gourmetgate.persistence.tables.records.CategoryRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.ItemRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.ItemToVariantRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.UserRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.VariantOptionRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.VariantRecord;
+import app.gourmetgate.gourmetgate.persistence.tables.records.VatRecord;
+
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -19,14 +32,15 @@ import org.jooq.impl.Internal;
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Keys {
 
-  // -------------------------------------------------------------------------
-  // UNIQUE and PRIMARY KEY definitions
-  // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // UNIQUE and PRIMARY KEY definitions
+    // -------------------------------------------------------------------------
 
-  public static final UniqueKey<CategoryRecord> CATEGORY_PKEY = Internal.createUniqueKey(Category.CATEGORY, DSL.name("category_pkey"), new TableField[]{Category.CATEGORY.CATEGORY_ID}, true);
-  public static final UniqueKey<ItemRecord> ITEM_PKEY = Internal.createUniqueKey(Item.ITEM, DSL.name("item_pkey"), new TableField[]{Item.ITEM.ITEM_ID}, true);
-  public static final UniqueKey<ItemToVariantRecord> ITEM_TO_VARIANT_PKEY = Internal.createUniqueKey(ItemToVariant.ITEM_TO_VARIANT, DSL.name("item_to_variant_pkey"), new TableField[]{ItemToVariant.ITEM_TO_VARIANT.ITEM_ID, ItemToVariant.ITEM_TO_VARIANT.VARIANT_ID}, true);
-  public static final UniqueKey<VariantRecord> VARIANT_PKEY = Internal.createUniqueKey(Variant.VARIANT, DSL.name("variant_pkey"), new TableField[]{Variant.VARIANT.VARIANT_ID}, true);
-  public static final UniqueKey<VariantOptionRecord> VARIANT_OPTION_PKEY = Internal.createUniqueKey(VariantOption.VARIANT_OPTION, DSL.name("variant_option_pkey"), new TableField[]{VariantOption.VARIANT_OPTION.VARIANT_OPTION_ID}, true);
-  public static final UniqueKey<VatRecord> VAT_PKEY = Internal.createUniqueKey(Vat.VAT, DSL.name("vat_pkey"), new TableField[]{Vat.VAT.VAT_ID}, true);
+    public static final UniqueKey<CategoryRecord> CATEGORY_PKEY = Internal.createUniqueKey(Category.CATEGORY, DSL.name("category_pkey"), new TableField[] { Category.CATEGORY.CATEGORY_ID }, true);
+    public static final UniqueKey<ItemRecord> ITEM_PKEY = Internal.createUniqueKey(Item.ITEM, DSL.name("item_pkey"), new TableField[] { Item.ITEM.ITEM_ID }, true);
+    public static final UniqueKey<ItemToVariantRecord> ITEM_TO_VARIANT_PKEY = Internal.createUniqueKey(ItemToVariant.ITEM_TO_VARIANT, DSL.name("item_to_variant_pkey"), new TableField[] { ItemToVariant.ITEM_TO_VARIANT.ITEM_ID, ItemToVariant.ITEM_TO_VARIANT.VARIANT_ID }, true);
+    public static final UniqueKey<UserRecord> USER_PKEY = Internal.createUniqueKey(User.USER, DSL.name("user_pkey"), new TableField[] { User.USER.USER_ID }, true);
+    public static final UniqueKey<VariantRecord> VARIANT_PKEY = Internal.createUniqueKey(Variant.VARIANT, DSL.name("variant_pkey"), new TableField[] { Variant.VARIANT.VARIANT_ID }, true);
+    public static final UniqueKey<VariantOptionRecord> VARIANT_OPTION_PKEY = Internal.createUniqueKey(VariantOption.VARIANT_OPTION, DSL.name("variant_option_pkey"), new TableField[] { VariantOption.VARIANT_OPTION.VARIANT_OPTION_ID }, true);
+    public static final UniqueKey<VatRecord> VAT_PKEY = Internal.createUniqueKey(Vat.VAT, DSL.name("vat_pkey"), new TableField[] { Vat.VAT.VAT_ID }, true);
 }

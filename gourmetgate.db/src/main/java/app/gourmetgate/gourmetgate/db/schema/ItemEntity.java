@@ -1,6 +1,6 @@
 package app.gourmetgate.gourmetgate.db.schema;
 
-import app.gourmetgate.gourmetgate.db.common.OrderableEntityWithStatus;
+import app.gourmetgate.gourmetgate.db.common.GorumetGateEntitiy;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "item")
-public class ItemEntity extends OrderableEntityWithStatus {
+public class ItemEntity extends GorumetGateEntitiy {
 
   @Id
   public UUID itemId;

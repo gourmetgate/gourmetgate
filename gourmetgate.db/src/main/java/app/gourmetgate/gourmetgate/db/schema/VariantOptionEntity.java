@@ -1,6 +1,6 @@
 package app.gourmetgate.gourmetgate.db.schema;
 
-import app.gourmetgate.gourmetgate.db.common.OrderableEntityWithStatus;
+import app.gourmetgate.gourmetgate.db.common.GorumetGateEntitiy;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "variant_option")
-public class VariantOptionEntity extends OrderableEntityWithStatus {
+public class VariantOptionEntity extends GorumetGateEntitiy {
 
   @Id
   public UUID variantOptionId;

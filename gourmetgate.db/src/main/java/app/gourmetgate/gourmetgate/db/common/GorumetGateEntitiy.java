@@ -8,12 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.Instant;
 
 @MappedSuperclass
-public class OrderableEntityWithStatus implements ISchemaEntity {
-
-  @CreationTimestamp
-  @Column(columnDefinition = "TIMESTAMPTZ NOT NULL DEFAULT NOW()")
-  public Instant sortCode;
-
-  @Column(columnDefinition = "varchar(80) NOT NULL DEFAULT 'ACTIVE'")
+public class GorumetGateEntitiy implements ISchemaEntity {
+  @Column(columnDefinition = "DEFAULT 'ACTIVE'", nullable = false, length = 80)
   public String status = Status.ACTIVE.id;
+  @CreationTimestamp
+  @Column(columnDefinition = "TIMESTAMPTZ DEFAULT NOW()", nullable = false)
+  public Instant sortCode;
 }
