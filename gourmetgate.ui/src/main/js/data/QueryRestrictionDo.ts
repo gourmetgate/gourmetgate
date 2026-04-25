@@ -1,5 +1,5 @@
 import {typeName} from "@eclipse-scout/core";
-import {CategoryRestrictionDo, ItemRestrictionDo, VariantRestrictionDo, VatRestrictionDo} from "./../index";
+import {CategoryRestrictionDo, ItemRestrictionDo, VariantRestrictionDo, VatRestrictionDo, UserRestrictionDo} from "./../index";
 
 @typeName("gourmetgate.QueryRestriction")
 export class QueryRestrictionDo {
@@ -7,4 +7,5 @@ export class QueryRestrictionDo {
   itemRestriction?: ItemRestrictionDo;
   variantRestriction?: VariantRestrictionDo;
   vatRestriction?: VatRestrictionDo;
+  userRestriction:?: UserRestrictionDo;
 }

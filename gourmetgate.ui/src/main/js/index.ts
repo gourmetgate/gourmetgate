@@ -20,6 +20,9 @@ export * from './data/VatRestrictionDo';
 export * from './data/VatResponseDo';
 export * from './data/QueryRestrictionDo';
 export * from './data/QueryResponseDo';
+export * from './data/user/UserDo';
+export * from './data/user/UserResponseDo';
+export * from './data/user/UserRestrictionDo';
 
 export * from './rest/AbstractRestClient';
 export * from './rest/QueryRestClient';

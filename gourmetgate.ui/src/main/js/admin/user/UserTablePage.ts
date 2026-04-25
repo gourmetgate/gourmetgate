@@ -7,7 +7,8 @@ import {UserForm} from "./UserForm";
 import {UserDo} from "../../data/user/UserDo";
 import {UserRestClient} from "./UserRestClient";
 import {UserResponseDo} from "../../data/user/UserResponseDo";
-
+import {QueryResponseDo} from "../../data/QueryResponseDo";
+import {QueryRestClient} from "../../index";
 export class UserTablePage extends AdminTablePage {
   protected override _listeningDataTypes(): string[] {
     return [UserRestClient.DATA_TYPE];
